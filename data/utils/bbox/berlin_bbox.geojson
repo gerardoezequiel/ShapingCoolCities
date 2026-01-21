@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "berlin_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Berlin", "country": "Germany", "city_lat": 52.5167, "city_lon": 13.3833, "center_lat": 52.516220355302671, "center_lon": 13.392333984375, "west": 13.381214640715978, "south": 52.509450229617492, "east": 13.403313196705319, "north": 52.52289802833927, "minx_3857": 1489590.0, "miny_3857": 6892770.0, "maxx_3857": 1492050.0, "maxy_3857": 6895230.0, "width_km": 1.497, "height_km": 1.497, "area_km2": 2.241, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 8801, "tile_y": 5373, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.403313196705319, 52.509450229617492 ], [ 13.403313196705319, 52.52289802833927 ], [ 13.381214640715978, 52.52289802833927 ], [ 13.381214640715978, 52.509450229617492 ], [ 13.403313196705319, 52.509450229617492 ] ] ] } }
+]
+}

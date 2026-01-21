@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "barcelona_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Barcelona", "country": "Spain", "city_lat": 41.3825, "city_lon": 2.1769, "center_lat": 41.38505142724361, "center_lon": 2.186279296875, "west": 2.1750907974385973, "south": 41.37660146597262, "east": 2.1971893534279374, "north": 41.393181690319459, "minx_3857": 242130.0, "miny_3857": 5068050.0, "maxx_3857": 244590.0, "maxy_3857": 5070510.0, "width_km": 1.846, "height_km": 1.846, "area_km2": 3.407, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 8291, "tile_y": 6119, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 2.197189353427937, 41.37660146597262 ], [ 2.197189353427937, 41.393181690319459 ], [ 2.175090797438597, 41.393181690319459 ], [ 2.175090797438597, 41.37660146597262 ], [ 2.197189353427937, 41.37660146597262 ] ] ] } }
+]
+}

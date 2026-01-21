@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/ESP_Spain/CT_Catalonia/ESP_CT_Barcelona.081800_TMYx.2007-2021.zip",
+  "longitude": 2.133,
+  "latitude": 41.417,
+  "elevation": 176,
+  "name": "Barcelona CT ESP",
+  "wmo": "081800",
+  "climate_zone": "3A - Warm - Humid",
+  "period": "2017-2021",
+  "heating_db": "3.9 C",
+  "cooling_db": "29.3 C",
+  "hdd18": "1178",
+  "cdd10": "2551",
+  "time_zone": "+1.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}

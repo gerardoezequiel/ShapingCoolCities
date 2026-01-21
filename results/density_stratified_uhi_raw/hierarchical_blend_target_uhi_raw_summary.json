@@ -1,0 +1,10 @@
+{
+  "target": "target_uhi_raw",
+  "description": "UHI anomaly (city-demeaned \u00b0C)",
+  "metrics": {
+    "Model": "Hierarchical blend (nested CV)",
+    "R\u00b2": 0.8400184517977833,
+    "RMSE": 0.8513106514350882,
+    "MAE": 0.5580169671724385
+  }
+}

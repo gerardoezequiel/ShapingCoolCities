@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "amsterdam_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Amsterdam", "country": "Netherlands", "city_lat": 52.3667, "city_lon": 4.8833, "center_lat": 52.368891196701682, "center_lon": 4.888916015625, "west": 4.8778519927690009, "south": 52.362075539056782, "east": 4.8999505487583415, "north": 52.375568391380853, "minx_3857": 543000.0, "miny_3857": 6865860.0, "maxx_3857": 545460.0, "maxy_3857": 6868320.0, "width_km": 1.502, "height_km": 1.502, "area_km2": 2.256, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 8414, "tile_y": 5384, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 4.899950548758341, 52.362075539056782 ], [ 4.899950548758341, 52.375568391380853 ], [ 4.877851992769001, 52.375568391380853 ], [ 4.877851992769001, 52.362075539056782 ], [ 4.899950548758341, 52.362075539056782 ] ] ] } }
+]
+}

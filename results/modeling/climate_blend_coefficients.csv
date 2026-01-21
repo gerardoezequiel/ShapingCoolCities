@@ -1,0 +1,5 @@
+feature,coefficient
+intercept,-0.08852132364382212
+pred_global,-0.1514165830812101
+pred_target_uhi_raw_mediterranean_dry-summer_(csa),0.6473924368462876
+pred_target_uhi_raw_temperate_oceanic_(cfb),0.7642329850953133

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "athens_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Athens", "country": "Greece", "city_lat": 37.9842, "city_lon": 23.7281, "center_lat": 37.987503860112625, "center_lon": 23.719482421875, "west": 23.708247146953994, "south": 37.978648493261183, "east": 23.730345702943335, "north": 37.996065394617304, "minx_3857": 2639190.0, "miny_3857": 4576410.0, "maxx_3857": 2641650.0, "maxy_3857": 4578870.0, "width_km": 1.939, "height_km": 1.939, "area_km2": 3.759, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 9271, "tile_y": 6320, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.730345702943335, 37.978648493261183 ], [ 23.730345702943335, 37.996065394617304 ], [ 23.708247146953994, 37.996065394617304 ], [ 23.708247146953994, 37.978648493261183 ], [ 23.730345702943335, 37.978648493261183 ] ] ] } }
+]
+}

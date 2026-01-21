@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/FRA_France/IF_Ile-de-France/FRA_IF_Paris.MontSouris.071560_TMYx.2004-2018.zip",
+  "longitude": 2.337833333333333,
+  "latitude": 48.821666666666665,
+  "elevation": 78,
+  "name": "Paris.MontSouris IF FRA",
+  "wmo": "071560",
+  "climate_zone": "4A - Mixed - Humid",
+  "period": "2004-2018",
+  "heating_db": "-1.6 C",
+  "cooling_db": "29.4 C",
+  "hdd18": "2277",
+  "cdd10": "1458",
+  "time_zone": "+1.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}

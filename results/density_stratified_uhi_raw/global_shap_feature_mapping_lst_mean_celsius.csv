@@ -1,0 +1,117 @@
+shap_column,feature_name
+shap_0,bld building count
+shap_1,bld total footprint area
+shap_2,bld total wall surface area
+shap_3,bld far
+shap_4,bld area weighted height
+shap_5,bld height std weighted
+shap_6,bld height p10
+shap_7,bld height p90
+shap_8,bld height range
+shap_9,bld height relative
+shap_10,bld aspect ratio weighted
+shap_11,bld compactness weighted
+shap_12,bld wall to plan ratio
+shap_13,bld thermal mass index
+shap_14,bld facade orientation entropy
+shap_15,bld canyon width mean
+shap_16,bld courtyard fraction
+shap_17,bld area weighted building year
+shap_18,bld age pre1950 share
+shap_19,bld age 1950 1990 share
+shap_20,bld age post1990 share
+shap_21,bld frontal area density ns
+shap_22,bld frontal area density ew
+shap_23,bld has buildings
+shap_24,image count
+shap_25,building mean
+shap_26,road mean
+shap_27,sidewalk mean
+shap_28,vegetation mean
+shap_29,sky mean
+shap_30,water mean
+shap_31,beautiful mean
+shap_32,safe mean
+shap_33,wealthy mean
+shap_34,boring mean
+shap_35,depressing mean
+shap_36,urb node count
+shap_37,urb edge count
+shap_38,urb street length
+shap_39,urb network degree
+shap_40,urb network betweenness
+shap_41,urb network closeness
+shap_42,urb population popsum density
+shap_43,urb population children density
+shap_44,urb building footprint proportion
+shap_45,urb building building count
+shap_46,urb streetview green view
+shap_47,urb streetview sky view
+shap_48,urb streetview building view
+shap_49,urb streetview road view
+shap_50,urb streetview visual complexity mean
+shap_51,urb street orientation index
+shap_52,urb meshedness
+shap_53,urb connectivity beta
+shap_54,urb canyon ratio
+shap_55,urb has network data
+shap_56,evi
+shap_57,mndwi
+shap_58,ndbi
+shap_59,albedo
+shap_60,builtup fraction remote
+shap_61,canopy height mean
+shap_62,distance to coast
+shap_63,distance to green
+shap_64,distance to water
+shap_65,emissivity std
+shap_66,era5 relative humidity mean
+shap_67,era5 wind speed mean
+shap_68,land cover
+shap_69,modis et mean
+shap_70,modis evaporative fraction
+shap_71,relative elevation
+shap_72,slope
+shap_73,vegetation fraction
+shap_74,water fraction
+shap_75,paved fraction
+shap_76,tree canopy distance
+shap_77,dense vegetation distance
+shap_78,tree canopy fraction 90m
+shap_79,tree canopy fraction 150m
+shap_80,tree canopy fraction 300m
+shap_81,impervious fraction 300m
+shap_82,vegetation fraction 90m
+shap_83,vegetation fraction 300m
+shap_84,svf
+shap_85,gvi
+shap_86,solar
+shap_87,solar daily summer
+shap_88,solar winter peak
+shap_89,solar direct
+shap_90,solar seasonal ratio
+shap_91,solar direct ratio
+shap_92,urban heat island
+shap_93,evapotranspiration
+shap_94,canyon heating
+shap_95,green cooling potential
+shap_96,shadow cooling
+shap_97,solar contrast
+shap_98,building height mean
+shap_99,canopy height mean
+shap_100,built up ratio
+shap_101,tree canopy ratio
+shap_102,building volume sum
+shap_103,canopy volume sum
+shap_104,canyon aspect ratio
+shap_105,landcover impervious ratio
+shap_106,landcover vegetation ratio
+shap_107,grid resolution m
+shap_108,height to coverage ratio
+shap_109,ventilation proxy
+shap_110,urban heat trap index
+shap_111,canyon sky openness
+shap_112,impervious fraction neighbor std 150m
+shap_113,impervious fraction neighbor mean 300m
+shap_114,tree canopy cover neighbor mean 300m
+shap_115,ventilation proxy neighbor mean 150m

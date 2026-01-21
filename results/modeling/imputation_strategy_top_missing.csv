@@ -1,0 +1,11 @@
+Feature,Max Missing %,Imputation Strategy,Rationale
+bld_area_weighted_building_year,100.0,No imputation (skip list),Sparse coverage / ratios not suitable for median fill
+gee_distance_to_coast,100.0,No imputation (skip list),Only coastal cities have valid values; inland = genuinely NA
+urb_streetview_sky_view,95.3,No imputation (skip list),Sparse coverage / ratios not suitable for median fill
+urb_intersection_density,95.3,City-wise median (fallback to 0),High missingness (95.3%) requires robust imputation
+urb_canyon_ratio,95.3,City-wise median (fallback to 0),High missingness (95.3%) requires robust imputation
+urb_connectivity_beta,95.3,City-wise median (fallback to 0),High missingness (95.3%) requires robust imputation
+urb_meshedness,95.3,City-wise median (fallback to 0),High missingness (95.3%) requires robust imputation
+urb_street_orientation_index,95.3,City-wise median (fallback to 0),High missingness (95.3%) requires robust imputation
+urb_streetview_visual_complexity_mean,95.3,No imputation (skip list),Sparse coverage / ratios not suitable for median fill
+urb_streetview_road_view,95.3,No imputation (skip list),Sparse coverage / ratios not suitable for median fill

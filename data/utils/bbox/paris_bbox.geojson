@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "paris_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Paris", "country": "France", "city_lat": 48.8566, "city_lon": 2.3522, "center_lat": 48.857486480762134, "center_lon": 2.362060546875, "west": 2.3508012670123755, "south": 48.850190619577646, "east": 2.3728998230017155, "north": 48.864730023000178, "minx_3857": 261690.0, "miny_3857": 6249480.0, "maxx_3857": 264150.0, "maxy_3857": 6251940.0, "width_km": 1.619, "height_km": 1.619, "area_km2": 2.62, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 8299, "tile_y": 5636, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 2.372899823001716, 48.850190619577646 ], [ 2.372899823001716, 48.864730023000178 ], [ 2.350801267012375, 48.864730023000178 ], [ 2.350801267012375, 48.850190619577646 ], [ 2.372899823001716, 48.850190619577646 ] ] ] } }
+]
+}

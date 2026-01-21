@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/GRC_Greece/AT_Attica/GRC_AT_Athinai-Hellinikon.Olympic.Complex.167160_TMYx.2007-2021.zip",
+  "longitude": 23.741666666666667,
+  "latitude": 37.88966666666666,
+  "elevation": 21,
+  "name": "Athinai-Hellinikon.Olympic.Complex AT GRC",
+  "wmo": "167160",
+  "climate_zone": "3B - Warm - Dry",
+  "period": "2007-2021",
+  "heating_db": "3.6 C",
+  "cooling_db": "34.3 C",
+  "hdd18": "888",
+  "cdd10": "3379",
+  "time_zone": "+2.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "madrid_bbox",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "city": "Madrid", "country": "Spain", "city_lat": 40.4167, "city_lon": -3.7167, "center_lat": 40.421859842105277, "center_lon": -3.724365234375, "west": -3.7354644459542055, "south": 40.413266244657059, "east": -3.7133658899648654, "north": 40.430089721277326, "minx_3857": -415830.0, "miny_3857": 4926180.0, "maxx_3857": -413370.0, "maxy_3857": 4928640.0, "width_km": 1.873, "height_km": 1.873, "area_km2": 3.507, "grid_size_m": 30, "cells_per_side": 82, "total_cells": 6724, "extent_m": 2460, "zoom_level": 14, "tile_x": 8022, "tile_y": 6177, "grid_aligned": true, "data_source": "Fixed 82x82 grid centered on zoom 14 tile" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -3.713365889964865, 40.413266244657059 ], [ -3.713365889964865, 40.430089721277326 ], [ -3.735464445954205, 40.430089721277326 ], [ -3.735464445954205, 40.413266244657059 ], [ -3.713365889964865, 40.413266244657059 ] ] ] } }
+]
+}

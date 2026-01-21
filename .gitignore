@@ -1,2 +1,27 @@
-# macOS
+# System files
 .DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs and temp
+*.log
+*.tmp
+.cache/
+
+# Dissertation text (focus on code reproducibility)
+dissertation/
+*.pdf
+
+# Large data files (exceed GitHub 100MB limit)
+data/0-raw/Buildings/
+data/0-raw/GlobalStreetscapes/
+

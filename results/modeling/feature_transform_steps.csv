@@ -1,0 +1,6 @@
+Step,Scope,Purpose
+Log transform (log1p),"bld_frontal_area_index, bld_wall_to_plan_ratio, gee_distance_to_water, gee_tree_canopy_distance",Stabilise heavy-tailed distributions before scaling
+Winsorise (1%),"bld_height_relative, vox_solar, urb_streetview_road_view",Limit extreme outliers without discarding rows
+Skip list (no imputation),"bld_area_weighted_building_year, bld_age_pre1945, bld_age_1945_1969, bld_age_1970_1989, bld_age_1990_1999, bld_age_2000_2009, bld_age_2010_2014, bld_age_post2015, urb_streetview_green_view, urb_streetview_sky_view, urb_streetview_building_view, urb_streetview_road_view, urb_streetview_visual_complexity_mean",Sparse coverage / ratios not suitable for median fill
+Within-city z-score,166 features,Ensure comparability across the six study cities
+High-correlation filter,|r| > 0.92,Remove redundant predictors after scaling

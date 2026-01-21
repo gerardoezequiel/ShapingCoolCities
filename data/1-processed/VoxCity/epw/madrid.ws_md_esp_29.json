@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/ESP_Spain/MD_Madrid/ESP_MD_Madrid.WS.082200_TMYx.2007-2021.zip",
+  "longitude": -3.7241666666666666,
+  "latitude": 40.45166666666667,
+  "elevation": 669,
+  "name": "Madrid.WS MD ESP",
+  "wmo": "082200",
+  "climate_zone": "3A - Warm - Humid",
+  "period": "2017-2021",
+  "heating_db": "-3.3 C",
+  "cooling_db": "37.4 C",
+  "hdd18": "1789",
+  "cdd10": "2255",
+  "time_zone": "+1.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}

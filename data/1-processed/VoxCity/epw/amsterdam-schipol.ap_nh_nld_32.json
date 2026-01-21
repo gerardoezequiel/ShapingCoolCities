@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/NLD_Netherlands/NH_Noord-Holland/NLD_NH_Amsterdam-Schipol.AP.062400_TMYx.2004-2018.zip",
+  "longitude": 4.789666666666667,
+  "latitude": 52.317166666666665,
+  "elevation": -3,
+  "name": "Amsterdam-Schipol.AP NH NLD",
+  "wmo": "062400",
+  "climate_zone": "4A - Mixed - Humid",
+  "period": "2004-2018",
+  "heating_db": "-3.9 C",
+  "cooling_db": "25.9 C",
+  "hdd18": "2690",
+  "cdd10": "1073",
+  "time_zone": "+1.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}

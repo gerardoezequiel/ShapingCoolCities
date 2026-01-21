@@ -1,0 +1,10 @@
+{
+  "target": "target_lst_mean_celsius",
+  "description": "Raw daytime LST (\u00b0C)",
+  "metrics": {
+    "Model": "Hierarchical blend (nested CV)",
+    "R\u00b2": 0.9687989332313027,
+    "RMSE": 0.8693356601114632,
+    "MAE": 0.5924936642296479
+  }
+}

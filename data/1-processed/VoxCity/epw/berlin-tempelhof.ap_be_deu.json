@@ -1,0 +1,16 @@
+{
+  "url": "https://climate.onebuilding.org/WMO_Region_6_Europe/DEU_Germany/BE_Berlin/DEU_BE_Berlin-Tempelhof.AP.103840_TMYx.zip",
+  "longitude": 13.402166666666666,
+  "latitude": 52.4675,
+  "elevation": 49,
+  "name": "Berlin-Tempelhof.AP BE DEU",
+  "wmo": "103840",
+  "climate_zone": "5A - Cool - Humid",
+  "period": "1930-2009",
+  "heating_db": "-8.3 C",
+  "cooling_db": "28.2 C",
+  "hdd18": "3193",
+  "cdd10": "1108",
+  "time_zone": "+1.0",
+  "kml_source": "https://climate.onebuilding.org/sources/Region6_Europe_TMYx_EPW_Processing_locations.kml"
+}
