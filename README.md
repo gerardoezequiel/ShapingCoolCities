@@ -42,9 +42,21 @@ These heterogeneous sources are spatially integrated at 30m resolution with clim
 
 ![Methodology overview](results/Shapping_cool_cities_method.png)
 
+![VoxCity 3D solar simulation](results/figures/voxcity_iso_solar_panel.png)
+*Solar irradiance simulation from VoxCity 3D voxel models across six cities. Yellow indicates high solar exposure; blue indicates shaded areas.*
+
 ---
 
 ## Key Results
+
+![LST intracity](results/figures/gee_LST_mean_intracity.png)
+*The problem: Land Surface Temperature anomalies across six cities. Red indicates urban heat islands exceeding city averages by 2-4°C.*
+
+![Risk tiers](results/figures/risk_tiers_panels.png)
+*Combined heat-vulnerability risk tiers across six cities. Dark red indicates areas where high thermal exposure meets demographic vulnerability, requiring priority intervention.*
+
+![Temperature reduction](results/figures/temperature_reduction_map.png)
+*Predicted temperature reductions from optimised intervention scenarios. Cooling of 1-2°C achievable in priority zones through strategic de-sealing.*
 
 ### Feature Importance Hierarchy
 
@@ -117,10 +129,11 @@ pip install -r requirements.txt
 earthengine authenticate
 ```
 
-Create a `.env` file with your GEE project ID:
-```
-GEE_PROJECT=your-project-id
-```
+Then update the GEE project ID in the notebooks:
+- `notebooks/04_GoogleEarthEngine.ipynb`
+- `notebooks/05_VoxCity.ipynb`
+
+Replace `'urbanheat-dissertation'` with your own GEE project ID in the `ee.Initialize()` call.
 
 ---
 
@@ -157,8 +170,7 @@ If you use this code or methodology, please cite:
 ```bibtex
 @mastersthesis{martincarreno2026,
   author  = {Martín Carreño, Gerardo Ezequiel},
-  title   = {Shaping Cool Cities:
-             Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities},
+  title   = {Shaping Cool Cities: Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities},
   school  = {University College London},
   year    = {2026},
   type    = {MSc Thesis}
@@ -176,3 +188,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Acknowledgements
 
 This research was conducted as part of the MSc Urban Spatial Science programme at the Centre for Advanced Spatial Analysis (CASA), University College London.
+
+**Author:** Gerardo Ezequiel Martín Carreño — [LinkedIn](https://www.linkedin.com/in/gerardoezequielmc/)
+**Supervisor:** Duncan Smith

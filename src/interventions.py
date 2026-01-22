@@ -1,38 +1,3 @@
-"""NB09 interventions and optimisation API.
-
-This module centralises the logic needed by Notebook 09 to work with
-cooling intervention optimisation:
-
-* Running the 400‑combination parameter grid search (optional and heavy).
-* Loading the grid-search artefacts written to ``results/scenarios``.
-* Exposing optimised intervention parameter sets as typed objects.
-
-The intent is that the notebook only needs to import from this module,
-keeping complex logic in versioned Python rather than in ad‑hoc cells.
-
-Typical usage from ``notebooks/09_Cooling_Interventions.ipynb``::
-
-    from pathlib import Path
-    from interventions import (
-        run_comprehensive_grid_search,
-        load_grid_search_results,
-        load_intervention_scenarios,
-        scenarios_to_frame,
-        InterventionScenario,
-        GridSearchResult,
-    )
-
-    PROJECT_ROOT = Path.cwd().parent if Path.cwd().name == 'notebooks' else Path.cwd()
-
-    # Normal use: just load optimised scenarios
-    scenarios = load_intervention_scenarios(PROJECT_ROOT)
-    display(scenarios_to_frame(scenarios))
-
-    # Only if needed: re-run the full grid search (5–10 minutes)
-    full, best = run_comprehensive_grid_search(PROJECT_ROOT)
-    display(best)
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -49,9 +14,6 @@ import xgboost as xgb
 from src.model_preprocessing import build_model_dataset
 
 
-# ---------------------------------------------------------------------------
-# Public dataclasses
-# ---------------------------------------------------------------------------
 
 
 @dataclass
@@ -82,10 +44,6 @@ class InterventionScenario:
     pct_cells_ge_0_5C: float
     n_extremes: int
 
-
-# ---------------------------------------------------------------------------
-# Core grid-search implementation (ported from /tmp/comprehensive_grid_search_with_albedo.py)
-# ---------------------------------------------------------------------------
 
 
 def run_comprehensive_grid_search(

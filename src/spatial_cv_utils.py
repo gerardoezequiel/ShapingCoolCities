@@ -12,9 +12,7 @@ from shapely import wkb
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 GRID_PATH = PROJECT_ROOT / "data/utils/grids/all_cities_30m_grid.parquet"
-# Updated 2025-01-10: Use bld_total_footprint_area_scaled instead of
-# bld_building_coverage_ratio_scaled (which was removed by the correlation
-# filter due to r=1.000 with bld_total_footprint_area_scaled).
+
 DENSITY_FEATURE = "bld_total_footprint_area_scaled"
 
 # Fallbacks for notebooks that still request deprecated density columns.
