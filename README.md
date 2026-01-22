@@ -96,10 +96,14 @@ These heterogeneous sources are spatially integrated at 30m resolution with clim
 │   ├── 08_Risk_Hotspot.ipynb     # Hotspot & vulnerability mapping
 │   └── 09_Interventions.ipynb    # Cooling scenarios
 │
-└── data/
-    ├── 0-raw/              # External data sources
-    ├── 1-processed/        # Processed features per source
-    └── 2-model-ready/      # Final model input
+├── data/
+│   ├── 0-raw/              # External data sources
+│   ├── 1-processed/        # Processed features per source
+│   └── 2-model-ready/      # Final model input
+│
+└── results/
+    ├── figures/            # Visualisation outputs
+    └── modeling/           # Trained models & predictions
 ```
 
 ---
