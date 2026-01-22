@@ -157,11 +157,11 @@ If you use this code or methodology, please cite:
 ```bibtex
 @mastersthesis{martincarreno2026,
   author  = {Martín Carreño, Gerardo Ezequiel},
-  title   = {Urban Heat Island Modelling and Mitigation Strategies:
-             A Multi-City Analysis of European Cities},
+  title   = {Shaping Cool Cities:
+             Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities},
   school  = {University College London},
   year    = {2026},
-  type    = {MSc Dissertation}
+  type    = {MSc Thesis}
 }
 ```
 
