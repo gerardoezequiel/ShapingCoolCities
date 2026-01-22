@@ -2,7 +2,7 @@
 
 **Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities**
 
-The summer of 2022 killed over 61,000 Europeans from heat-related causes—the deadliest heatwave on record. Yet cities remain unprepared, not because data is scarce, but because translating observations into actionable cooling strategies remains unsolved.
+The summer of 2022 killed over 61,000 Europeans from heat-related causes, the deadliest heatwave on record. Yet cities remain unprepared, not because data is scarce, but because translating observations into actionable cooling strategies remains unsolved.
 
 This repository contains a complete analytical framework that bridges that gap: from satellite imagery and 3D urban models to interpretable predictions and intervention priorities.
 
@@ -16,7 +16,7 @@ European cities have never had more data about urban heat. Satellites capture su
 
 | Finding | Implication |
 |---------|-------------|
-| Thermal effects operate at **300-metre scales** | Cooling one plot achieves nothing if surroundings remain sealed. Most programmes target individual properties—the wrong scale. |
+| Thermal effects operate at **300-metre scales** | Cooling one plot achieves nothing if surroundings remain sealed. Most programmes target individual properties, the wrong scale. |
 | **Surface permeability matters 3× more than vegetation** | The policy obsession with tree planting misallocates resources. De-sealing delivers greater cooling returns. |
 | A **50% de-sealing threshold** marks a regime boundary | Below this, evaporative cooling becomes viable. Incremental improvements that fail to cross this threshold waste money. |
 
