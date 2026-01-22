@@ -1,6 +1,6 @@
 # Shaping Cool Cities
 
-**Predicting urban heat and optimising cooling interventions across European cities**
+**Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities**
 
 The summer of 2022 killed over 61,000 Europeans from heat-related causes—the deadliest heatwave on record. Yet cities remain unprepared, not because data is scarce, but because translating observations into actionable cooling strategies remains unsolved.
 
@@ -24,7 +24,7 @@ European cities have never had more data about urban heat. Satellites capture su
 
 ## What This Framework Does
 
-The pipeline processes **40,344 grid cells** across six European cities (Amsterdam, Athens, Barcelona, Berlin, Madrid, Paris) through two phases:
+The pipeline processes 6 regular-size study areas across six European cities (Amsterdam, Athens, Barcelona, Berlin, Madrid, Paris) through two phases:
 
 ### Phase 1: Multi-Source Feature Engineering
 - **Satellite imagery** — Extract land surface temperature, NDVI, spectral indices, and impervious fraction from Landsat 8/9 via Google Earth Engine
