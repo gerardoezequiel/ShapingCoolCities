@@ -1,0 +1,62 @@
+{
+  "amsterdam": {
+    "file": "amsterdam_voxels.json",
+    "count": 36523,
+    "dims": [
+      300,
+      301,
+      16
+    ],
+    "hasSolar": true
+  },
+  "athens": {
+    "file": "athens_voxels.json",
+    "count": 28445,
+    "dims": [
+      387,
+      388,
+      18
+    ],
+    "hasSolar": true
+  },
+  "barcelona": {
+    "file": "barcelona_voxels.json",
+    "count": 31741,
+    "dims": [
+      368,
+      370,
+      53
+    ],
+    "hasSolar": true
+  },
+  "berlin": {
+    "file": "berlin_voxels.json",
+    "count": 26615,
+    "dims": [
+      299,
+      300,
+      20
+    ],
+    "hasSolar": true
+  },
+  "madrid": {
+    "file": "madrid_voxels.json",
+    "count": 29461,
+    "dims": [
+      374,
+      375,
+      28
+    ],
+    "hasSolar": true
+  },
+  "paris": {
+    "file": "paris_voxels.json",
+    "count": 37718,
+    "dims": [
+      323,
+      324,
+      16
+    ],
+    "hasSolar": true
+  }
+}

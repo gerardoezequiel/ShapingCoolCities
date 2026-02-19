@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shaping Cool Cities — Gerardo Ezequiel Martin Carreno</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shaping Cool Cities — Urban AI for Heat-Resilient European Cities">
+  <meta property="og:description" content="How strategic de-sealing outperforms tree planting for urban cooling across six European cities. MSc research by Gerardo Ezequiel Martin Carreno, UCL CASA.">
+  <meta property="og:image" content="assets/priority_zones_spatial.png">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shaping Cool Cities">
+  <meta name="twitter:description" content="Urban AI for Heat-Resilient European Cities">
+  <meta name="twitter:image" content="assets/priority_zones_spatial.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a1a;
+      color: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #16213e 0%, #0a0a1a 50%, #1a1a2e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(233, 69, 96, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(93, 173, 226, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3em 1em;
+      border: 1px solid #e94560;
+      border-radius: 20px;
+      color: #e94560;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.5em;
+      background: linear-gradient(135deg, #ffffff 0%, #ff6b81 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: #b0b0b0;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .author {
+      font-size: 0.95rem;
+      color: #999;
+      margin-bottom: 3rem;
+    }
+
+    .author strong {
+      color: #e8e8e8;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 0.8em 2em;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .cta-primary {
+      background: #e94560;
+      color: #ffffff;
+    }
+
+    .cta-primary:hover {
+      background: #ff6b81;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: #e8e8e8;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Abstract section */
+    .section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      border-bottom: 2px solid #e94560;
+      display: inline-block;
+      padding-bottom: 0.2em;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #b0b0b0;
+      margin-bottom: 1em;
+    }
+
+    /* Key findings grid */
+    .findings {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .finding-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-top: 3px solid #e94560;
+    }
+
+    .finding-card h3 {
+      font-size: 0.95rem;
+      color: #e94560;
+      margin-bottom: 0.5em;
+    }
+
+    .finding-card p {
+      font-size: 0.9rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .finding-card .stat {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: block;
+      margin-bottom: 0.3em;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer a {
+      color: #e94560;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="tag">UrbanAI 2026</span>
+      <h1>Shaping Cool Cities</h1>
+      <p class="subtitle">Urban AI for Heat-Resilient European Cities<br>How strategic de-sealing outperforms tree planting for urban cooling</p>
+      <p class="author"><strong>Gerardo Ezequiel Martin Carreno</strong><br>MSc Urban Spatial Science &mdash; UCL CASA</p>
+      <div class="cta-group">
+        <a href="index.html" class="cta cta-primary">View Presentation</a>
+        <a href="https://github.com/gerardoezequiel/shaping-cool-cities" class="cta cta-secondary">GitHub Repository</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Abstract</h2>
+    <p>
+      European cities face escalating heat risk, yet struggle to translate abundant urban data into actionable cooling strategies. This research develops an integrated analytical framework that predicts urban heat intensity across six European cities — Amsterdam, Athens, Barcelona, Berlin, Madrid, and Paris — using 118 features from five complementary data sources at 30-metre resolution.
+    </p>
+    <p>
+      Using XGBoost with hierarchical climate-zone blending (R&sup2; = 0.841) and SHAP-based interpretability, the framework reveals that surface permeability matters approximately three times more than vegetation for temperature reduction — challenging the prevailing emphasis on tree planting. A regime boundary at 50% de-sealing enables evaporative cooling pathways that achieve 95% of maximum impact with 60% fewer resources.
+    </p>
+    <p>
+      The framework generates city-specific priority maps combining heat risk, demographic vulnerability, and cooling potential to guide equitable intervention targeting, while acknowledging the risk of green gentrification.
+    </p>
+  </section>
+
+  <div class="findings">
+    <div class="finding-card">
+      <span class="stat">3&times;</span>
+      <h3>Surface vs. Vegetation</h3>
+      <p>De-sealing matters three times more than tree planting for urban temperature reduction.</p>
+    </div>
+    <div class="finding-card">
+      <span class="stat">50%</span>
+      <h3>Regime Boundary</h3>
+      <p>Below 50% sealed surfaces, evaporative cooling pathways become viable — a phase transition.</p>
+    </div>
+    <div class="finding-card">
+      <span class="stat">6</span>
+      <h3>Cities Analysed</h3>
+      <p>40,344 grid cells across three climate zones, proving geographic contingency is the signal.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Research presented at UrbanAI 2026 &mdash; <a href="mailto:gerardo.martin@ucl.ac.uk">gerardo.martin@ucl.ac.uk</a></p>
+  </footer>
+
+</body>
+</html>
