@@ -21,6 +21,13 @@ venv/
 dissertation/
 *.pdf
 
+# Speaker notes (private)
+presentation/speaker-guide.*
+presentation/speaker-notes.md
+presentation/speaker_notes.md
+presentation/shaping_cool_cities_speaker_notes.md
+presentation/qa-preparation.md
+
 # Large data files (exceed GitHub 100MB limit)
 data/0-raw/Buildings/
 data/0-raw/GlobalStreetscapes/

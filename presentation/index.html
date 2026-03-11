@@ -11,10 +11,10 @@
   <meta property="og:image" content="assets/priority_zones_spatial.png">
   <meta property="og:type" content="website">
 
-  <!-- Leaflet (local copy; CDN: https://unpkg.com/leaflet@1.9.4/dist/leaflet.css) -->
+  <!-- Leaflet (local copy) -->
   <link rel="stylesheet" href="js/vendor/leaflet/leaflet.css" />
 
-  <!-- Fonts (local copy; CDN: https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap) -->
+  <!-- Fonts (local copy) -->
   <style>
     @font-face {
       font-family: 'Inter';
@@ -25,9 +25,9 @@
     }
   </style>
 
-  <!-- Reveal.js CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/white.css" id="theme">
+  <!-- Reveal.js CSS (local) -->
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css" id="theme">
   <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
@@ -38,429 +38,469 @@
       <!-- SLIDE 1: TITLE -->
       <!-- ============================================================ -->
       <section data-transition="fade">
-        <div class="title-slide">
-          <h1 class="title-main">Shaping Cool Cities</h1>
-          <h3 class="title-sub">Multi-Source Data Fusion for Modelling Urban Heat<br>Mitigation Across Six European Cities</h3>
-          <div class="title-meta">
-            <p><strong>Gerardo Ezequiel Martin Carreno</strong></p>
-            <p>MSc Urban Spatial Science &middot; The Bartlett School of Architecture</p>
-            <p style="font-size:0.85em;">Centre for Advanced Spatial Analysis (CASA) &middot; UCL</p>
-            <p class="event-tag">UrbanAI &middot; 2026</p>
+        <div style="display:flex;align-items:center;width:100%;height:100%;gap:0;">
+          <!-- LEFT: Text panel -->
+          <div style="flex:0 0 42%;padding:0 2em 0 0.5em;display:flex;flex-direction:column;justify-content:center;">
+            <!-- Compact logo row -->
+            <div style="display:flex;align-items:center;gap:0.8em;margin-bottom:1.8em;">
+              <span style="font-size:0.42em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-tertiary);">UCL CASA</span>
+              <span style="width:1px;height:0.9em;background:var(--border);display:inline-block;"></span>
+              <span style="font-size:0.42em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-tertiary);">The Bartlett</span>
+              <span style="width:1px;height:0.9em;background:var(--border);display:inline-block;"></span>
+              <span style="font-size:0.42em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);">UrbanAI 2026</span>
+            </div>
+            <!-- Title -->
+            <h1 style="font-size:3.2em;font-weight:800;line-height:1.0;margin:0 0 0.1em 0;color:var(--text-primary);letter-spacing:-0.03em;">Shaping<br>Cool Cities</h1>
+            <!-- Accent bar -->
+            <div style="width:80px;height:4px;background:var(--accent);border-radius:2px;margin:0.4em 0 0.7em 0;"></div>
+            <!-- Subtitle -->
+            <p style="font-size:0.72em;font-weight:400;color:var(--text-secondary);line-height:1.5;margin:0 0 1.5em 0;">Multi-source data fusion for modelling urban heat mitigation across six European cities</p>
+            <!-- Author -->
+            <div style="font-size:0.55em;">
+              <p style="margin:0 0 0.15em 0;color:var(--text-primary);font-weight:700;">Gerardo Ezequiel Martin Carreno</p>
+              <p style="margin:0;color:var(--text-tertiary);font-size:0.85em;">MSc Urban Spatial Science &middot; UCL</p>
+            </div>
+          </div>
+          <!-- RIGHT: Hero image -->
+          <div style="flex:0 0 58%;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <img src="assets/diagrams/intro_hero_v4.png" alt="Multi-source data fusion: satellite, street network, and street-level views converging to map urban heat and cooling" style="max-width:100%;max-height:76vh;object-fit:contain;">
+            <p style="font-size:0.36em;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.4em;">Six cities &middot; Five data sources &middot; 118 features &middot; Open data</p>
           </div>
         </div>
         <aside class="notes">
-          Thank you for having me. I'm Gerardo, I completed my MSc in Urban Spatial Science at The Bartlett, UCL's Centre for Advanced Spatial Analysis. How do we translate the abundance of urban data into guidance cities can act on? That's the question this research set out to answer. Specifically: how do we move from observing heat to prescribing cooling interventions, city by city?
+          [0:00 — 15s]
 
-          [Q&A REFERENCE: Full title: "Shaping Cool Cities: A Multi-Source Machine Learning Framework for Urban Heat Prediction and Cooling Intervention Optimisation Across European Climates." Supervised by Dr Adam Dennett (CASA, UCL). Second marker: Dr Bonnie Buyuklieva. Urban AI connection: the diagnosis-to-prescription pipeline is what Urban AI frames as "from intelligence to action" — this framework operationalises that framing for heat.]
+          Thank you. I'm Gerardo, from UCL's Centre for Advanced Spatial Analysis. Today I'll show how we turned open urban data into cooling guidance that cities can act on — neighbourhood by neighbourhood.
+
+          [IF RUNNING LONG: Skip slides 7a-7c (data source details), compress validation to one sentence, skip co-benefits. Recovers ~3 min.]
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE 2: THE HOOK - 61,000 -->
+      <!-- ACT 1: WHY THIS MATTERS -->
       <!-- ============================================================ -->
+
+      <!-- SLIDE 2: THE HOOK -->
       <section data-transition="fade">
-        <div class="section-marker">The Problem</div>
+        <div class="act-marker"><span class="current">Why</span><span>How</span><span>Findings</span><span>Action</span></div>
         <div class="hook-slide">
-          <p class="large-number" data-fragment-index="0">61,000</p>
+          <p class="large-number">61,000</p>
           <p class="hook-text">Deaths from heat across Europe.<br>One summer. 2022.</p>
-          <blockquote class="fragment fade-up" data-fragment-index="1">
-            The deadliest natural hazard in European history.<br>
+          <blockquote>
+            Among the deadliest natural disasters in modern European history.<br>
             Streets designed to maximise winter sunlight had become heat traps.
           </blockquote>
           <p class="source">Ballester et al. (2023) <em>Nature Medicine</em></p>
         </div>
-        <div class="slide-ref">Ballester, J. et al. (2023) &lsquo;Heat-related mortality in Europe during the summer of 2022&rsquo;, <em>Nature Medicine</em>, 29(7), pp. 1857-1866.</div>
         <aside class="notes">
-          [PAUSE — let the number land]
+          [0:15 — 30s. PAUSE — let the number count up before speaking.]
 
-          Sixty-one thousand people died from heat across Europe in the summer of 2022. The deadliest natural hazard event in European history. Not a flood, not a storm. Heat. Yet when planners asked "where should we plant trees?" or "which streets should we depave?" there was remarkably little useful guidance.
-
-          [Q&A REFERENCE: Ballester et al. 2023 — 61,672 deaths across 35 countries, June-September 2022. Previous worst: 2003 European heatwave (~70,000 deaths but over longer period, less precisely attributed). This is surface UHI (SUHI), not canopy-layer UHI (CUHI). Landsat measures radiative skin temperature at surface level. CUHI is air temperature at 1.5-2m measured by weather stations — too sparse for city-scale spatial analysis. If asked "why not air temperature?": SUHI enables spatially comprehensive analysis at 30m. CUHI-SUHI correlation is imperfect, but neighbourhood-level relative rankings are preserved. Framework maps anomalies (relative hot/cool), so ordering holds even if absolute magnitude differs from air temperature.]
+          Sixty-one thousand people. One summer. Not a flood, not a storm — heat. Among the deadliest natural disasters in modern European history. And when planners asked "where should we intervene?" — there was remarkably little spatial guidance. That's the problem we set out to solve.
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 3: THE DATA PARADOX -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 3: THREE GAPS + RESEARCH QUESTIONS -->
       <section data-transition="slide">
-        <h2>The Data Opportunity</h2>
-        <p class="fragment fade-up" data-fragment-index="1">Every year, cities gain access to more and richer data about their built environment.</p>
-        <p class="fragment fade-up" data-fragment-index="2" style="margin-top:0.8em;">The barrier is no longer <em>data availability</em>. It&rsquo;s <strong class="accent">data integration</strong>.</p>
-        <p class="fragment fade-up key-finding" data-fragment-index="3" style="margin-top:1em;">How do we <strong>integrate</strong> this data to make our cities <strong style="color:var(--blue);">cooler</strong>?</p>
-        <div class="slide-ref">Oke, T.R. et al. (2017) <em>Urban Climates</em>. Cambridge University Press. &middot; Cheval, S. et al. (2024) <em>Climate Risk Management</em>, 44, 100603.</div>
-        <aside class="notes">
-          We have more urban data than ever before, and the quality keeps improving. Satellites, 3D models, street imagery. The challenge is no longer availability — it's integration: combining these sources into guidance planners can act on. That's what this research does. Six cities, three climates, open-source tools, diagnosis to prescription.
-
-          [BRIDGE] So what's preventing cities from using all this data? Three gaps.
-
-          [Q&A REFERENCE: "Open-source" means: GEE (free academic access), EUBUCCO (CC-BY 4.0), GlobalStreetscapes (CC-BY 4.0), Urbanity (MIT licence), VoxCity (open access). Full pipeline on GitHub under MIT licence. "No black boxes" connects to SHAP explainability — every prediction decomposes into individual feature contributions. "Diagnosis-to-prescription" is deliberate framing: Stage 1 diagnoses (what's hot, why), Stage 2 detects (where heat meets vulnerability), Stage 3 prescribes (what interventions, how much cooling).]
-        </aside>
-      </section>
-
-      <!-- ============================================================ -->
-      <!-- SLIDE 4: THREE GAPS -->
-      <!-- ============================================================ -->
-      <section data-transition="slide">
+        <div class="act-marker"><span class="current">Why</span><span>How</span><span>Findings</span><span>Action</span></div>
         <h2>Three Gaps Preventing Action</h2>
-        <div class="gap-item fragment fade-right" data-fragment-index="1">
-          <h3 class="accent">Integration</h3>
-          <p>Studies look at buildings, trees, or streets separately. Heat comes from how they <em>interact</em>.</p>
+        <div class="split-slide">
+          <div class="split-text" style="flex:0.55;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;flex-direction:column;gap:0.8em;">
+              <div class="gap-item">
+                <h3 class="accent" style="margin-bottom:0.1em;">Integration</h3>
+                <p style="font-size:0.75em;">Studies look at buildings, trees, or streets separately. Heat comes from how they <em>interact</em>.</p>
+              </div>
+              <div class="gap-item">
+                <h3 class="accent" style="margin-bottom:0.1em;">Transferability</h3>
+                <p style="font-size:0.75em;">The same tree cools 8&ndash;12&deg;C in Berlin but only 0&ndash;4&deg;C in Athens. Same strategy, different results.</p>
+              </div>
+              <div class="gap-item">
+                <h3 class="accent" style="margin-bottom:0.1em;">Action</h3>
+                <p style="font-size:0.75em;">Planners need the <em>where</em>, the <em>why</em>, and the <em>how</em>. Most models only give the first.</p>
+              </div>
+            </div>
+            <div class="fragment fade-up" data-fragment-index="0" style="margin-top:0.6em;">
+              <p class="key-finding" style="font-size:0.8em;margin-bottom:0.3em;"><strong>RQ1:</strong> What drives urban heat across contexts?</p>
+            </div>
+            <div class="fragment fade-up" data-fragment-index="1">
+              <p class="key-finding" style="font-size:0.8em;"><strong>RQ2:</strong> <strong class="accent">Where should cities intervene</strong> to protect the most vulnerable?</p>
+            </div>
+          </div>
+          <div class="split-image" style="flex:0.45;display:flex;align-items:center;justify-content:center;">
+            <img src="assets/diagrams/three_gaps_v1.png" alt="Three research gaps: Integration, Transferability, and Action" style="max-height:55vh;border-radius:8px;">
+          </div>
         </div>
-        <div class="gap-item fragment fade-right" data-fragment-index="2">
-          <h3 class="accent">Transferability</h3>
-          <p>Vegetation cools 3&times; more in Berlin than in Athens. Same strategy, different results.</p>
-        </div>
-        <div class="gap-item fragment fade-right" data-fragment-index="3">
-          <h3 class="accent">Action</h3>
-          <p>Planners need the <em>where</em>, the <em>why</em>, and the <em>how</em>. Most models only give the first.</p>
-        </div>
-        <p class="fragment fade-up key-finding" data-fragment-index="4" style="margin-top:1em;font-size:0.85em;">Two questions: <strong>What drives urban heat</strong> across contexts? And <strong class="accent">where should cities intervene</strong> to protect the most vulnerable?</p>
-        <div class="slide-ref">Sharston, R. et al. (2025) Urban morphology and UHI interactions. &middot; Lundberg, S. &amp; Lee, S.-I. (2017) SHAP: A unified approach to interpreting model predictions. &middot; Camps-Valls, G. et al. (2025) <em>Nature Communications</em>, 16, 1919.</div>
+        <div class="slide-ref">Schwaab et al. (2021) <em>Nat. Comms.</em> &middot; Camps-Valls et al. (2025) <em>Nature Communications</em>. &middot; Lundberg &amp; Lee (2017) SHAP.</div>
         <aside class="notes">
-          Three gaps prevent cities from acting.
+          [0:45 — 40s]
 
-          First, integration. Studies examine morphology, vegetation, or networks in isolation. Heat emerges from their interactions.
+          Three gaps prevent cities from acting. Integration: heat comes from how buildings, surfaces, and vegetation interact — studying them in isolation misses the picture. Transferability: the same tree cools dramatically in Berlin but barely in Athens — climate mediates everything. And the action gap: models predict well but don't explain why, so planners can't translate predictions into decisions.
 
-          Second, transferability. Schwaab et al. found identical tree species cool 8-12 degrees in Central Europe but only 0-4 in the Mediterranean. A programme designed for one climate context may deliver substantially less in another.
-
-          Third, the action gap. Models predict well but explain poorly. Planners need to know why and what to change. [PAUSE]
-
-          Two questions: What drives urban heat across contexts? And where should cities intervene?
-
-          [Q&A REFERENCE: Integration gap — how building arrangements channel winds determines whether a tree's cooling actually reaches pedestrians. Interventions designed from single-source studies fail when deployed across contexts (Li et al. 2020: morphology ignores vegetation obstruction; Li et al. 2024: vegetation assumes uniform building contexts). Action gap — the barrier between model outputs and actionable design briefs. ML models achieve impressive accuracy but function as black boxes. Camps-Valls et al. 2025 tripartite framework: quantification, understanding, communication — most ML-UHI studies stop at quantification. Schwaab mechanism: evapotranspiration constrained by vapour pressure deficit — dry air limits transpiration regardless of soil moisture. If asked "why not physics-based models like ENVI-met?": computationally prohibitive across 40,344 cells and six cities. ENVI-met operates at street-section scale (metres, hours of compute per block). This framework screens at neighbourhood scale (30m, minutes of compute for all six cities). Complementary, not competing — ENVI-met should follow this framework for detailed design.]
+          Two research questions drive this work. What drives urban heat across contexts? And where should cities intervene to protect the most vulnerable?
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE 5: SIX CITIES -->
+      <!-- ACT 2: HOW IT WORKS -->
       <!-- ============================================================ -->
+
+      <!-- SLIDE 4: SIX CITIES -->
       <section data-transition="slide">
-        <div class="section-marker">The Data</div>
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <h2>Six Cities, Three Climates</h2>
         <div class="split-slide">
           <div class="split-text">
             <p><strong style="color:var(--blue);">Oceanic (Cfb)</strong>: Amsterdam, Paris</p>
             <p><strong style="color:var(--accent);">Mediterranean (Csa)</strong>: Athens, Barcelona</p>
             <p><strong style="color:var(--text-secondary);">Transitional</strong>: Berlin <span style="font-size:0.75em;color:var(--text-tertiary);">Cfb/Dfb</span> &middot; Madrid <span style="font-size:0.75em;color:var(--text-tertiary);">Csa/BSk</span></p>
-            <p class="fragment fade-up stat-line" data-fragment-index="1">40,344 grid cells at 30m resolution<br>~6 km&sup2; per city</p>
+            <p class="stat-line">40,344 grid cells at 30m resolution &middot; ~6 km&sup2; per city</p>
           </div>
           <div class="split-image" style="position:relative;min-height:65vh;">
-            <!-- Layer 1: Leaflet location map (visible initially) -->
-            <div id="study-areas-map-container" class="fragment source-fade-out" data-fragment-index="1"
+            <div id="study-areas-map-container" class="fragment source-fade-out" data-fragment-index="0"
                  style="position:absolute;top:0;left:0;width:100%;height:65vh;z-index:2;" aria-label="Interactive map showing six study city locations across Europe"></div>
-            <!-- Layer 2: Study area grids (appears on click) -->
             <img src="assets/study_grids_30m.png" alt="30m study area grids across six European cities"
-                 class="fragment derived-fade-in" data-fragment-index="1"
+                 class="fragment derived-fade-in" data-fragment-index="0"
                  style="max-height:65vh;width:100%;object-fit:contain;">
           </div>
         </div>
-        <div class="slide-ref">Yap, W. et al. (2023) Urbanity, <em>npj Urban Sustainability</em>. &middot; Stewart, I.D. &amp; Oke, T.R. (2012) <em>BAMS</em>, 93(12), pp. 1879-1900.</div>
+        <div class="slide-ref">Stewart &amp; Oke (2012) <em>BAMS</em>. &middot; Yap et al. (2023) Urbanity, <em>npj Urban Sustainability</em>.</div>
         <aside class="notes">
-          Six cities across a climate gradient. Amsterdam and Paris oceanic. Athens and Barcelona Mediterranean. Berlin and Madrid transitional — they test whether the framework handles climate ambiguity.
+          [1:25 — 30s]
 
-          [CLICK] Each city gridded at 30-metre resolution, 40,344 cells total. Equal-area approach: roughly 6 square kilometres per urban core.
-
-          [Q&A REFERENCE: Berlin sits at the Cfb/Dfb boundary, Madrid at the Csa/BSk semi-arid transition. Equal-area approach lets us compare morphological effects without confounding them with different study extents. Grid alignment: EPSG:3857 zoom level 14 tiles aligned with GlobalStreetscapes sampling framework. MAUP: 60m loses 17% variance (falls between building-scale radiative and neighbourhood-scale advective — misaligns with both). 90m recovers non-monotonically. Multi-seed stability: σ(R²) = 0.064 across 5 random seeds. If asked "why these six?": maximise climatic variation within constraints of all five data sources. EUBUCCO limits to Europe. Adding non-European cities requires substituting EUBUCCO with OSM buildings (less accurate heights) or Google Open Buildings.]
+          Six cities spanning two major European climates. Amsterdam and Paris are oceanic — mild, humid. Athens and Barcelona are Mediterranean — hot, dry summers. Berlin and Madrid sit at the boundary between the two — they're the hardest test for the framework. Each city gridded at 30-metre resolution: about 40,000 cells total.
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 7: DATA INTEGRATION -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 5: FIVE DATA SOURCES -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <h2>Five Data Sources, One Framework</h2>
-        <p style="font-size:0.75em;color:var(--text-secondary);margin-bottom:0.3em;">No single dataset captures urban heat. The novelty is <strong class="accent">data fusion</strong>: <strong>118 features</strong> from 5 open-source tools. Zero proprietary data.</p>
+        <p style="font-size:0.75em;color:var(--text-secondary);margin-bottom:0.3em;"><strong>118 features</strong> from 5 open-source tools. Zero proprietary data. Any European city can replicate this tomorrow.</p>
         <img src="assets/Shapping_cool_cities_method.png" alt="Analytical framework diagram"
              style="width:100%;max-height:68vh;object-fit:contain;border-radius:8px;border:1px solid var(--border);box-shadow:var(--shadow-md);">
         <div class="slide-ref">Gorelick et al. (2017) GEE &middot; Fujiwara et al. (2026) VoxCity &middot; Yap et al. (2023) Urbanity &middot; Hou et al. (2024) GlobalStreetscapes &middot; Milojevic-Dupont et al. (2023) EUBUCCO</div>
         <aside class="notes">
-          The novelty is fusion: 118 features from five open-source tools. GEE gives us surface temperature. EUBUCCO gives 3D building morphology. Urbanity captures how streets connect. GlobalStreetscapes adds the pedestrian perspective. All open. Any European city can replicate this tomorrow.
+          [1:55 — 20s]
 
-          Let me show you these briefly.
-
-          [Q&A REFERENCE: No single source captures urban heat. Satellites see surface temperature but not street-level shade. Street imagery captures the pedestrian experience but not morphological context. Building models give geometry but not network connectivity. The novelty is fusing five complementary perspectives into a unified feature space — 118 features, each grounded in urban climate theory. Coverage by source: GEE 95-99%, VoxCity 92-99%, EUBUCCO 34-92% (Madrid lowest at 65.6% missing), GlobalStreetscapes 29-71% (Athens lowest at 71.2% missing), Urbanity 7-12% (network node architecture — every intersection captured). Missingness: city-specific median imputation with binary indicator flags — model learns to treat imputed vs observed differently. Feature pipeline: 165 base → spatial lags at 150m (pedestrian) and 300m (neighbourhood/advective) → 189 candidates → Pearson |r| > 0.92 filter → 118 final. Six physics-informed derived features: urban heat trap index, vegetation cooling saturation (log-scaled), canyon sky openness, ventilation proxy (SVF × (1 − building coverage)), impervious-canopy balance, height-to-coverage ratio. Temporal mismatch caveat: GEE = summer 2024 composites, GlobalStreetscapes = undated imagery (various years), EUBUCCO/VoxCity = static. Assumes morphological features change slowly relative to seasonal thermal dynamics.]
+          The novelty here is data fusion. 118 features from five open-source tools — satellite imagery, 3D building models, street networks, street-level photos, and solar simulations. Zero proprietary data. Any European city can replicate this. Let me walk you quickly through each source.
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 7-GEE: GOOGLE EARTH ENGINE - LST + NDVI -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 6: GOOGLE EARTH ENGINE - LST + NDVI -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <img src="assets/Shapping_cool_cities_method.png" alt="Framework context" class="framework-thumb">
         <div style="display:flex;align-items:baseline;gap:0.5em;margin-bottom:0.2em;">
           <h2 style="margin-bottom:0;padding-bottom:0.15em;">Google Earth Engine</h2>
           <span style="font-size:0.55em;color:var(--text-tertiary);letter-spacing:0.03em;">Landsat 30m &middot; Surface temperature &middot; Vegetation indices</span>
         </div>
-        <div style="display:flex;gap:1em;height:72vh;">
+        <div style="display:flex;gap:1em;height:60vh;">
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
             <img src="assets/gee_LST_mean_intracity.png" alt="Land Surface Temperature across six cities"
-                 style="max-height:70vh;max-width:100%;object-fit:contain;">
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Land Surface Temperature</span>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
             <img src="assets/gee_NDVI_intracity.png" alt="NDVI vegetation index across six cities"
-                 style="max-height:70vh;max-width:100%;object-fit:contain;">
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">NDVI Vegetation Index</span>
           </div>
         </div>
+        <p class="key-finding" style="font-size:0.6em;margin-top:0.15em;">Where vegetation disappears, temperatures spike. This inverse pattern is the dependent variable our model learns to predict.</p>
         <div class="slide-ref">Gorelick, N. et al. (2017) &lsquo;Google Earth Engine&rsquo;, <em>Remote Sensing of Environment</em>, 202, pp. 18-27.</div>
         <aside class="notes">
-          Google Earth Engine is the backbone. Landsat at 30-metre resolution gives us our dependent variable: land surface temperature. Summer composites, cloud-filtered. Notice the inverse pattern: where temperature is high, vegetation is low.
+          [2:15 — 25s. Let the images do the work.]
 
-          [Q&A REFERENCE: Landsat 8/9 Collection 2 Level 2. Summer months (June-August). Cloud masking via QA_PIXEL band. Compositing: per-pixel median. Anomaly = LST_cell − LST_city_mean — isolates morphological heating from background climate. Summer composites are cloud-filtered, with intra-city anomalies so we're comparing within each city, not between them. The LST-NDVI relationship isn't linear — log relationship, not linear. The model captures this. NDVI calculated from same Landsat scenes.]
+          Google Earth Engine is the backbone. Landsat at 30-metre resolution gives us surface temperature — our target variable. Notice the inverse pattern on these panels: where vegetation disappears, temperatures spike. This relationship is what the model learns to predict.
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 7a: URBANITY - Source → Derived transition -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 7: URBANITY - Street Network Topology -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <img src="assets/Shapping_cool_cities_method.png" alt="Framework context" class="framework-thumb">
         <div style="display:flex;align-items:baseline;gap:0.5em;margin-bottom:0.2em;">
           <h2 style="margin-bottom:0;padding-bottom:0.15em;">Urbanity</h2>
           <span style="font-size:0.55em;color:var(--text-tertiary);letter-spacing:0.03em;">Street network topology &middot; Connectivity &middot; Ventilation pathways</span>
         </div>
-        <div style="display:flex;gap:1em;height:74vh;">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+        <div style="display:flex;gap:1em;height:60vh;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <img src="assets/source_urbanity.webp" alt="Urbanity: network analysis across global cities"
-                 style="max-height:72vh;max-width:100%;object-fit:contain;">
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Source: Urbanity global dataset</span>
           </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
-            <img src="assets/urbanity_network_panels.png" alt="Our six cities: street network topology extracted by Urbanity"
-                 style="max-height:72vh;max-width:100%;object-fit:contain;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <img src="assets/urbanity_network_panels.png" alt="Our six cities: street network topology"
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Our six cities: network topology</span>
           </div>
         </div>
+        <p class="key-finding" style="font-size:0.6em;margin-top:0.15em;">Amsterdam&rsquo;s regular canal grid channels cooling winds. Athens&rsquo;s organic fabric traps them. Network topology determines whether park cooling reaches surrounding streets.</p>
         <div class="slide-ref">Yap, W. et al. (2023) &lsquo;Urbanity&rsquo;, <em>npj Urban Sustainability</em>.</div>
         <aside class="notes">
-          Urbanity extracts street network topology from OpenStreetMap. Different network structures mean different ventilation pathways. On the left, the global dataset; on the right, our six cities. Amsterdam's canal grid versus Athens's dense organic fabric.
+          [2:40 — 20s]
 
-          [Q&A REFERENCE: Urbanity extracts connectivity, betweenness centrality (ventilation corridors), meshedness (grid regularity), intersection density. The network determines how cooling propagates — network connectivity determines whether cooling from parks reaches surrounding streets. Amsterdam canal grid: high meshedness, regular spacing. Athens: low meshedness, irregular block sizes.]
+          Urbanity extracts street network topology. Different networks mean different ventilation. Amsterdam's canal grid channels cooling winds; Athens's organic fabric traps them. This determines whether park cooling reaches surrounding streets.
+
+          [Q&A: Betweenness centrality = how often a street lies on shortest paths. High betweenness = ventilation corridor. Meshedness = grid regularity. Amsterdam high, Athens low.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 7b: GLOBALSTREETSCAPES - Source → Derived transition -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 7b: GLOBALSTREETSCAPES - Street-Level Imagery -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <img src="assets/Shapping_cool_cities_method.png" alt="Framework context" class="framework-thumb">
         <div style="display:flex;align-items:baseline;gap:0.5em;margin-bottom:0.2em;">
           <h2 style="margin-bottom:0;padding-bottom:0.15em;">GlobalStreetscapes</h2>
           <span style="font-size:0.55em;color:var(--text-tertiary);letter-spacing:0.03em;">10 million street-level images &middot; Green View Index &middot; Pedestrian perspective</span>
         </div>
-        <div style="display:flex;gap:1em;height:74vh;">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+        <div style="display:flex;gap:1em;height:60vh;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <img src="assets/source_globalstreetscapes.webp" alt="GlobalStreetscapes: millions of street-level images worldwide"
-                 style="max-height:72vh;max-width:100%;object-fit:contain;">
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Source: 10M street-level images</span>
           </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <img src="assets/streetview_points_panels.png" alt="Our six cities: street-level imagery coverage"
-                 style="max-height:72vh;max-width:100%;object-fit:contain;">
+                 style="max-height:58vh;max-width:100%;object-fit:contain;">
             <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Our six cities: coverage points</span>
           </div>
         </div>
+        <p class="key-finding" style="font-size:0.6em;margin-top:0.15em;">Satellites see canopy from above. Street imagery sees shade from below. Divergence between the two validates the multi-source approach.</p>
         <div class="slide-ref">Hou, Y. et al. (2024) GlobalStreetscapes. &middot; Li, X. et al. (2015) Green View Index.</div>
         <aside class="notes">
-          GlobalStreetscapes: 10 million street-level images. From these we derive the Green View Index — vegetation visible at eye level, which satellites miss entirely. Coverage varies significantly by city.
+          [3:00 — 15s]
 
-          [Q&A REFERENCE: 10 million street-level images from Mapillary and KartaView. Berlin has 277K images, Paris only 14K. Coverage is systematic not random — commercial/tourist areas overrepresented, peripheral/low-income areas underrepresented (known bias addressed in scope conditions). NDVI from satellites misses urban canyons entirely. Coverage varies 29-71% by city. VoxCity GVI (voxel-based canopy volume) vs GlobalStreetscapes GVI (street-level panoramic segmentation) capture vegetation from different perspectives (overhead vs eye-level). Divergence validates multi-source approach.]
+          GlobalStreetscapes: 10 million street-level images. Green View Index — vegetation at eye level. Satellites see canopy from above; this sees shade from below. Divergence between the two validates the multi-source approach.
+
+          [Q&A: Coverage varies: Berlin 277K images, Paris only 14K. NDVI misses urban canyons. GVI from imagery vs GVI from voxels — different perspectives.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
       <!-- SLIDE 7c: EUBUCCO - 3D Building Morphology -->
-      <!-- ============================================================ -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <img src="assets/Shapping_cool_cities_method.png" alt="Framework context" class="framework-thumb">
         <div style="display:flex;align-items:baseline;gap:0.5em;margin-bottom:0.2em;">
           <h2 style="margin-bottom:0;padding-bottom:0.15em;">EUBUCCO</h2>
-          <span style="font-size:0.55em;color:var(--text-tertiary);letter-spacing:0.03em;">3D building morphology &middot; Heights &middot; Footprints &middot; Aspect ratios</span>
+          <span style="font-size:0.55em;color:var(--text-tertiary);letter-spacing:0.03em;">3D building morphology &middot; Heights &middot; Footprints &middot; Canyon geometry</span>
         </div>
         <img src="assets/buildings_height_panels.png" alt="Building height distribution across six European cities from EUBUCCO"
-             style="max-height:78vh;max-width:100%;object-fit:contain;">
-        <div class="slide-ref">Milojevic-Dupont, N. et al. (2023) &lsquo;EUBUCCO v0.1&rsquo;, <em>Scientific Data</em>, 10, 147.</div>
+             style="max-height:62vh;max-width:100%;object-fit:contain;display:block;margin:0 auto;">
+        <p class="key-finding" style="font-size:0.6em;margin-top:0.15em;">Canyon geometry drives nighttime heat retention. Paris&rsquo;s uniform Haussmann fabric vs Athens&rsquo;s irregular growth produce fundamentally different thermal dynamics.</p>
+        <div class="slide-ref">Milojevic-Dupont, N. et al. (2023) &lsquo;EUBUCCO v0.1&rsquo;, <em>Scientific Data</em>, 10, 146.</div>
         <aside class="notes">
-          EUBUCCO gives us 3D building morphology across Europe. Heights, footprints, canyon geometry. This is the structural skeleton of the urban heat island.
+          [3:15 — 15s]
 
-          [Q&A REFERENCE: 6,500 to 8,500 buildings per city in our study areas. Heights, footprints, aspect ratios. Sky view factor, surface-to-volume ratios all derive from this. Paris's uniform Haussmann fabric (18-25m uniform height) vs Athens's irregular organic growth (4-30m mixed heights). Amsterdam's low-rise canal buildings versus Barcelona's Eixample blocks. These morphological signatures drive fundamentally different heat dynamics.]
+          EUBUCCO: 3D building morphology across Europe. Heights, footprints, canyon geometry. Paris's uniform Haussmann fabric versus Athens's irregular organic growth — these drive fundamentally different thermal dynamics.
+
+          [Q&A: 6,500-8,500 buildings per city. Sky view factor and surface-to-volume ratios derived from this. Barcelona Eixample = regular canyons; Amsterdam low-rise = more sky exposure.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 7f: VOXCITY - Source → Geometry → Solar irradiance -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 8: VOXCITY - Six Cities in 3D -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <img src="assets/Shapping_cool_cities_method.png" alt="Framework context" class="framework-thumb">
         <h2 style="margin-bottom:0.3em;">Six Cities in 3D</h2>
         <div style="position:relative;width:100%;height:78vh;margin:0 auto;">
           <!-- Layer 1: VoxCity source + voxels side by side (visible on load) -->
           <div class="fragment source-fade-out" data-fragment-index="0"
                style="position:absolute;top:0;left:0;right:0;display:flex;gap:1em;height:78vh;">
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <img src="voxcity_vertical.webp" alt="VoxCity 3D city model vertical cross-section"
-                   style="max-height:74vh;max-width:100%;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.12);">
+                   style="max-height:70vh;max-width:100%;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.12);">
               <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">VoxCity 3D model</span>
             </div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <img src="voxels.webp" alt="3D voxel representation of urban morphology"
-                   style="max-height:74vh;max-width:100%;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.12);">
+                   style="max-height:70vh;max-width:100%;object-fit:contain;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.12);">
               <span style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.2em;">Voxelised urban form</span>
             </div>
           </div>
-          <!-- Layer 2: Isometric geometry panel (appears on first click) -->
+          <!-- Layer 2: Isometric geometry panel — voxelised cities (first click) -->
           <img src="assets/voxcity_iso_geometry_panel.png" alt="3D urban cores voxelised - 6 cities"
                class="fragment fade-in-then-out" data-fragment-index="0"
                style="position:absolute;top:0;left:50%;transform:translateX(-50%);max-height:78vh;max-width:100%;object-fit:contain;">
-          <!-- Layer 3: Solar irradiance panel (appears on second click) -->
+          <!-- Layer 3: GVI + SVF side by side (second click) -->
+          <div class="fragment fade-in-then-out" data-fragment-index="1"
+               style="position:absolute;top:0;left:0;right:0;display:flex;gap:0.5em;height:78vh;">
+            <img src="assets/voxcity_gvi_panel.png" alt="Green View Index across 6 cities"
+                 style="flex:1;max-height:78vh;object-fit:contain;">
+            <img src="assets/voxcity_svf_panel.png" alt="Sky View Factor across 6 cities"
+                 style="flex:1;max-height:78vh;object-fit:contain;">
+          </div>
+          <!-- Layer 4: Solar irradiance panel (third click — final) -->
           <img src="assets/voxcity_iso_solar_panel.png" alt="Diffuse solar irradiance across 6 cities"
-               class="fragment fade-in-then-out" data-fragment-index="1"
-               style="position:absolute;top:0;left:50%;transform:translateX(-50%);max-height:78vh;max-width:100%;object-fit:contain;">
-          <!-- Layer 4: Sky View Factor panel (appears on third click) -->
-          <img src="assets/voxcity_svf_panel.png" alt="Sky View Factor across 6 cities"
-               class="fragment fade-in-then-out" data-fragment-index="2"
-               style="position:absolute;top:0;left:50%;transform:translateX(-50%);max-height:78vh;max-width:100%;object-fit:contain;">
-          <!-- Layer 5: Green View Index panel (appears on fourth click) -->
-          <img src="assets/voxcity_gvi_panel.png" alt="Green View Index across 6 cities"
-               class="fragment fade-in" data-fragment-index="3"
+               class="fragment fade-in" data-fragment-index="2"
                style="position:absolute;top:0;left:50%;transform:translateX(-50%);max-height:78vh;max-width:100%;object-fit:contain;">
         </div>
-        <div class="slide-ref">Fujiwara, K. et al. (2026) &lsquo;VoxCity&rsquo;, <em>Computers, Environment and Urban Systems</em>, 123, 102366. &middot; Biljecki et al. (2015) <em>ISPRS Int. J. Geo-Inf.</em> &middot; Li, X. et al. (2015) Green View Index. &middot; Images: ual.sg/project/voxcity</div>
+        <div class="slide-ref">Fujiwara, K. et al. (2026) &lsquo;VoxCity&rsquo;, <em>Computers, Environment and Urban Systems</em>, 123, 102366. &middot; Biljecki et al. (2015) <em>ISPRS Int. J. Geo-Inf.</em> &middot; Li, X. et al. (2015) Green View Index.</div>
         <aside class="notes">
-          VoxCity converts open data into volumetric 3D models. [CLICK] Six cities voxelised. Dramatically different morphologies. [CLICK] Solar irradiance: Barcelona's grid distributes heat evenly, Athens's basin traps it. [CLICK] Sky View Factor. [CLICK] Green View Index.
+          [3:30 — 30s. Has 3 transitions. If behind, show geometry + GVI/SVF only.]
 
-          This 30m framework tells the designer which blocks to focus on. When we decompose each cell with SHAP, it tells them whether to de-seal, shade, or plant.
+          VoxCity converts open data into 3D models at 5-metre voxel resolution. [CLICK] Six cities voxelised — dramatically different morphologies. [CLICK] Green View Index and Sky View Factor side by side. GVI: canopy from a pedestrian's perspective. SVF: how open the sky is above. Low SVF means deep canyons trapping heat at night. [CLICK] Solar irradiance — Barcelona's grid distributes heat evenly, Athens's basin traps it.
 
-          [Q&A REFERENCE: VoxCity technical: 5m voxel resolution, aggregated to 30m grid cells. EPW weather files for solar simulation (15 June, 14:00 local time, TMYx 2007-2021 climatology). Ray-tracing accounts for building shadows and tree canopy transmittance. SVF = ratio of visible sky hemisphere to total hemisphere at ground level. Low SVF = deep canyons restricting longwave radiation loss at night → nocturnal heat retention. Solar irradiance was generated but used primarily for visualisation, not as a direct model feature — at 5m aggregated to 30m, the shadow signal smooths. SVF served as the proxy that entered the model. Green View Index derived from street-level imagery — vegetation as pedestrians experience it. Complementary scales: this framework screens at neighbourhood scale (which blocks, 30m). Street-section design (how to configure, 5-15m) requires microclimate tools like ENVI-met or RayMan. The 30m grid tells you "Block X is hot because imperviousness is 94% and SVF is 0.3" — that's a design brief: "this block needs de-sealing and shade intervention." How you configure the street section — tree species, paving material, canopy height, setback — is architectural judgment below 30m resolution.]
+          Five data sources, 118 features. Now — what do we do with them?
+
+          [Q&A: 5m voxels aggregated to 30m. EPW weather files, 15 June 14:00 local, TMYx 2007-2021. Ray-tracing: building shadows + canopy transmittance. SVF entered the model; solar irradiance primarily for visualisation.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 9a: FROM PREDICTION TO PRESCRIPTION -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 9: THREE-STAGE PIPELINE -->
       <section data-transition="slide">
-        <div class="section-marker">The Model</div>
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <h2>From Prediction to Prescription</h2>
-        <div class="method-steps">
-          <div class="method-step fragment fade-up">
-            <h3>1. Regression</h3>
-            <p>Predict temperature across 40,344 cells<br>
-            <span style="font-size:0.85em;">Output: temperature map + what drives heat in each cell</span></p>
-          </div>
-          <div class="method-step fragment fade-up">
-            <h3>2. Classification</h3>
-            <p>Identify hotspots with calibrated probabilities<br>
-            <span style="font-size:0.85em;">Output: risk tiers + priority zones weighted by vulnerability</span></p>
-          </div>
-          <div class="method-step fragment fade-up">
-            <h3>3. Scenario Grid Search</h3>
-            <p><strong>648 intervention combinations</strong> tested<br>
-            <span style="font-size:0.85em;">Output: what to change, where, and by how much</span></p>
-          </div>
-        </div>
-        <div class="slide-ref">Lundberg &amp; Lee (2017) SHAP. &middot; Tanoori et al. (2024) ML for UHI benchmarks. &middot; Lei et al. (2025) XAI + counterfactual simulation.</div>
+        <p style="font-size:0.72em;color:var(--text-secondary);margin-bottom:0.3em;">XGBoost with SHAP explainability: the model shows its work at every stage. The planner keeps the final call.</p>
+        <img src="assets/diagrams/pipeline_v3.png" alt="Three-stage pipeline diagram: regression predicts temperature, classification identifies hotspots weighted by vulnerability, scenario grid search tests 648 intervention combinations" style="max-height:72vh;width:100%;object-fit:contain;border-radius:8px;">
+        <div class="slide-ref">Chen &amp; Guestrin (2016) XGBoost. &middot; Lundberg &amp; Lee (2017) SHAP. &middot; Eyni et al. (2025) <em>Scientific Reports</em>.</div>
         <aside class="notes">
-          Three stages. Predict temperature anomalies. Classify hotspots with calibrated probabilities. Test 648 intervention scenarios. The model shows its work at every stage, the planner keeps the final call.
+          [4:00 — 30s]
 
-          [Q&A DEPTH: Stage 1 regression: city mean subtracted, so we isolate what morphology does from background climate. Stage 2 classification: sensitivity-tuned threshold flags cells most likely to overheat. Feature ranking shifts here — demographic vulnerability rises to top. Stage 3: each combination bootstrapped 500 times, physically implausible predictions filtered. Platt scaling converts XGBoost scores to probabilities, threshold = 0.30. 3 depaving × 9 veg × 8 tree × 3 albedo = 648. ±5°C plausibility filter. Why XGBoost not neural networks: (1) native SHAP TreeExplainer support for exact Shapley value decomposition, (2) captures non-linear thresholds linear models miss, (3) handles mixed feature types without scaling. Interpretability is non-negotiable for planning applications. Hyperparameters: 200 Bayesian trials (Optuna), minimising 5-fold CV RMSE. Final: 820 estimators, max_depth=6, learning_rate=0.03, subsample=0.78, colsample_bytree=0.74. Why grid search not Bayesian for scenarios: grid search maps full response surface — reveals non-linear shape (the 30→40→50% regime boundary). Optimisation finds optima faster but doesn't reveal the landscape. For planning, the shape matters more than finding the peak.]
+          Three stages. Predict temperature anomalies. Classify hotspots weighted by vulnerability. Test 648 intervention scenarios. The model shows its work — every prediction decomposes into feature contributions. The planner keeps the final call.
+
+          This is augmented intelligence — AI as co-pilot, not replacement. The planner sees the receipt for every prediction and decides what to act on.
+
+          [Q&A: XGBoost for exact SHAP TreeExplainer, nonlinear thresholds, mixed features. 200 Bayesian trials (Optuna). 3×9×8×3 = 648 combos, bootstrapped 500×.]
+
+          [Q&A: "Why not deep learning?" — (1) Exact Shapley values vs approximate. (2) XGBoost matches/beats neural nets on tabular data (Grinsztajn 2022). (3) 40K cells modest for DL. Explainability over marginal accuracy.]
+
+          [Q&A: "Not causal." — Correct. Hypotheses for field validation, not causal claims.]
+
+          [Q&A: "Why not CFD?" — CFD: one block in hours. We: 40K cells across 6 cities. Complementary — our priority zones tell you WHERE to deploy CFD.]
+
+          [Q&A: "New city timeline?" — Under half a day with existing Landsat. Bottleneck is vulnerability data curation.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 11: BUILDING THE MODEL -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 10: BUILDING THE MODEL -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span class="active">Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Building the Model</h2>
+        <h2>XGBoost Regression: Why This Approach?</h2>
         <div class="split-slide">
           <div class="split-text">
-            <p style="font-size:0.75em;color:var(--text-secondary);margin-bottom:0.3em;"><strong>40,344 cells</strong> at 30m resolution across 6 cities. Target: temperature anomalies (city average subtracted).</p>
-            <p class="fragment fade-up"><strong class="accent">118 features</strong> after spatial lags and correlation filtering</p>
-            <div class="fragment fade-up" style="margin-top:0.6em;">
-              <p><strong>Architecture</strong></p>
-              <ul style="font-size:0.75em;">
-                <li><strong>XGBoost</strong>: captures non-linear thresholds + built-in explainability</li>
-                <li><strong>Hierarchical blend</strong>: global + Mediterranean + oceanic specialists</li>
-                <li>Climate-zone models <em>dominate</em>; global model gets <strong>subtracted</strong></li>
-              </ul>
+            <p style="font-size:0.72em;color:var(--text-secondary);margin-bottom:0.2em;"><strong>40,344 cells</strong> &middot; 30m resolution &middot; 6 cities &middot; Target: <strong>UHI anomaly</strong> (each cell&rsquo;s temperature minus its city mean &mdash; not raw LST, which inflates R&sup2; to 0.97 by capturing climate, not urban form)</p>
+            <p style="font-size:0.72em;margin-bottom:0.4em;"><strong class="accent">Why XGBoost?</strong> Heat responds non-linearly to urban form. Trees cool effectively until water stress kicks in. Sealed surfaces trap heat, but the tipping point differs by climate. We need a model that captures these thresholds <em>and shows its reasoning</em>.</p>
+            <ul style="font-size:0.7em;">
+              <li><strong>Non-linear thresholds</strong>: captures regime changes linear models miss</li>
+              <li><strong>SHAP explainability</strong>: every prediction decomposes into feature contributions, so the planner sees <em>why</em></li>
+              <li><strong>Hierarchical blend</strong>: global + climate-zone specialists learn what each city needs differently</li>
+            </ul>
+            <p class="key-finding" style="margin-top:0.5em;font-size:0.78em;">Global R&sup2; 0.695 &rarr; Blended <strong>0.841</strong>. Climate-zone specialisation <strong class="accent">cuts error by 48%</strong>.</p>
+            <div style="display:flex;gap:0.4em;flex-wrap:wrap;margin-top:0.4em;">
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(196,81,58,0.08);color:var(--text-secondary);">Paris <strong style="color:var(--accent);">0.93</strong></span>
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(196,81,58,0.08);color:var(--text-secondary);">Barcelona <strong style="color:var(--accent);">0.93</strong></span>
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(196,81,58,0.08);color:var(--text-secondary);">Amsterdam <strong style="color:var(--accent);">0.88</strong></span>
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(42,127,111,0.08);color:var(--text-secondary);">Athens <strong style="color:var(--teal);">0.73</strong></span>
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(42,127,111,0.08);color:var(--text-secondary);">Berlin <strong style="color:var(--teal);">0.73</strong></span>
+              <span style="font-size:0.52em;padding:0.2em 0.5em;border-radius:4px;background:rgba(42,127,111,0.08);color:var(--text-secondary);">Madrid <strong style="color:var(--teal);">0.72</strong></span>
             </div>
-            <p class="fragment fade-up stat-line" style="margin-top:0.6em;">Global R&sup2; = 0.795 &rarr; Blended = <strong>0.840</strong>. The blend <strong class="accent">cuts prediction error by 22%</strong>.</p>
           </div>
-          <div class="split-image" style="flex-direction:column;gap:0.3em;">
-            <div class="blend-diagram" style="transform:scale(0.85);transform-origin:top center;" role="img" aria-label="Hierarchical blend architecture: global model weight −0.151, Cfb specialist 0.764, Csa specialist 0.647">
-              <div class="blend-box global">
-                <div class="blend-weight" style="color: var(--text-tertiary);">&minus;0.151</div>
-                <div class="blend-label">Global<br>(subtracted)</div>
-              </div>
-              <div class="blend-arrow">+</div>
-              <div class="blend-box specialist">
-                <div class="blend-weight" style="color: var(--accent);">0.764</div>
-                <div class="blend-label">Cfb specialist<br>(Temperate)</div>
-              </div>
-              <div class="blend-arrow">+</div>
-              <div class="blend-box specialist">
-                <div class="blend-weight" style="color: var(--accent);">0.647</div>
-                <div class="blend-label">Csa specialist<br>(Mediterranean)</div>
-              </div>
-            </div>
+          <div class="split-image">
+            <img src="assets/diagrams/xgboost_blend_v1.png" alt="XGBoost regression with hierarchical climate-zone blending: global model (−0.151) + Cfb specialist (0.764) + Csa specialist (0.647) = blended R² 0.841" style="max-height:68vh;border-radius:8px;">
           </div>
         </div>
         <div class="slide-ref">Chen &amp; Guestrin (2016) XGBoost, <em>KDD</em>. &middot; Lundberg &amp; Lee (2017) SHAP values. &middot; Oke et al. (2017) 300m advective transport scale.</div>
         <aside class="notes">
-          We built three models: global, Mediterranean specialist, oceanic specialist, and blended them. 118 features, SHAP explainability built in.
+          [4:30 — 40s]
 
-          [GESTURE TO BLEND DIAGRAM] The global model gets subtracted. Climate-zone specialists dominate. The blend cuts unexplained variance by 22%.
+          Three XGBoost models — global, Mediterranean specialist, oceanic specialist — blended with learned weights. [GESTURE to diagram] The global gets subtracted — negative weight. Climate-zone specialists dominate. The blend cuts unexplained variance by 48%.
 
-          [PAUSE]
+          Look at the city badges: Paris and Barcelona above 0.93. Athens and Berlin at 0.73. Madrid 0.72. The model works across contexts, but performance varies — and that variation is itself informative.
 
-          [BRIDGE] Does the model actually predict heat across contexts?
+          [Q&A: Blend: pred = β₀ + β₁·global + β₂·specialist. Weights: global −0.151, Cfb 0.764, Csa 0.647. 165 features → spatial lags → 189 → correlation filter → 118. Athens blend hurts: global 0.751 → blended 0.730, basin overrides climate correction.]
 
-          [Q&A DEPTH: 22% = 4.5 percentage-point R² improvement (0.795→0.840). Denominator is unexplained variance, not total. Blend equation: pred_blended = β₀ + β₁·pred_global + β₂·pred_specialist. Coefficients optimised per city via least-squares on held-out validation fold. Negative global weight means: the global model captures universal patterns but also introduces systematic errors from averaging across climates. Subtracting it corrects the specialists' residuals. Per-cell SHAP example: "This cell is +2.1°C because imperviousness contributes +1.4, water distance +0.5, vegetation −0.3, building height +0.5." 165 base features → spatial lags → 189 → correlation filter → 118. Six physics-informed features. 200 Bayesian trials (Optuna). MAUP: 60m loses 17% variance. See backup B10.]
-
-          [Q&A GLOSSARY: R²: How much temperature variation the model explains. 1.0 = perfect, 0 = guessing average. SHAP: Feature contribution receipt — what drove each prediction. AUC: Hotspot discrimination. 1.0 = perfect, 0.5 = coin flip. Ours = 0.911.]
+          [Q&A GLOSSARY: R² = proportion of variation explained. SHAP = feature contribution receipt. AUC = hotspot discrimination (0.5 = coin flip, 1.0 = perfect).]
         </aside>
       </section>
 
-      <!-- Prediction to Prescription moved before Building the Model -->
-
-      <!-- ============================================================ -->
-      <!-- SLIDE 9b: SPATIAL DIAGNOSTICS -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 11: SPATIAL CROSS-VALIDATION -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span class="active">Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Spatial Cross-Validation</h2>
-        <div class="split-slide">
-          <div class="split-text">
-            <p><strong>5-fold spatial cross-validation</strong> with stratified blocking</p>
-            <ul style="font-size:0.75em;">
-              <li><strong>No leakage</strong>: cells grouped in 600m blocks, no neighbours in both train and test</li>
-              <li><strong>Anomalies</strong>, not absolutes: city mean subtracted to isolate morphological signal</li>
-              <li><strong>300m spatial lags</strong>: physically motivated by advective transport (Oke et al. 2017)</li>
-            </ul>
-            <p class="fragment fade-up key-finding" style="margin-top:0.8em;">Residual diagnostics confirm the model learns morphology, not spatial patterns</p>
-          </div>
-          <div class="split-image">
-            <div class="stat-callout">
-              <div class="stat-number">30m</div>
-              <div class="stat-desc">Resolution = 2-3 city blocks<br>Tested at 30m, 60m, 90m<br>60m loses 17% variance</div>
+        <h2>Can We Trust the Numbers?</h2>
+        <p style="font-size:0.75em;color:var(--text-secondary);margin:0 0 0.5em 0;">Hot areas sit next to hot areas. Without careful testing, the model could just memorise <em>where</em> things are instead of learning <em>why</em> they&rsquo;re hot. Five checks prevent that.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;width:100%;">
+
+          <!-- Row 1, Col 1: Spatial CV -->
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:1.4em;font-weight:800;color:#fff;">1</span>
+            </div>
+            <div>
+              <p style="font-size:0.72em;font-weight:700;margin:0;">Spatial cross-validation</p>
+              <p style="font-size:0.62em;color:var(--text-secondary);margin:0.15em 0 0 0;line-height:1.45;">The model never sees its test area&rsquo;s neighbours during training. 5 folds, 600m spatial blocks, stratified by heat intensity and density.</p>
             </div>
           </div>
-        </div>
-        <div class="slide-ref">Oke, T.R. et al. (2017) <em>Urban Climates</em>, Cambridge University Press. &middot; Openshaw, S. (1984) MAUP, <em>Concepts and Techniques in Modern Geography</em>.</div>
-        <aside class="notes">
-          We tested the model rigorously. 5-fold spatial cross-validation, 600m block grouping. No spatial leakage. The model learns morphological relationships, not spatial patterns.
 
-          [Q&A DEPTH: Moran's I confirms minimal residual autocorrelation. MAUP tested at 30m, 60m, 90m — 30m provided best balance between resolution and feature stability. Model never sees neighbours of test cells during training. We model anomalies, not absolute temperatures, removing the large-scale spatial trend. 300m buffer aggregation physically grounded in Oke's advective transport scale.]
+          <!-- Row 1, Col 2: Anomaly -->
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:1.4em;font-weight:800;color:#fff;">2</span>
+            </div>
+            <div>
+              <p style="font-size:0.72em;font-weight:700;margin:0;">City-demeaned targets</p>
+              <p style="font-size:0.62em;color:var(--text-secondary);margin:0.15em 0 0 0;line-height:1.45;">Raw temperature R&sup2;&nbsp;=&nbsp;0.97, but that mostly captures <em>climate</em>. Subtracting each city&rsquo;s mean isolates what <em>urban form</em> does. R&sup2;&nbsp;=&nbsp;0.84.</p>
+            </div>
+          </div>
+
+          <!-- Row 2, Col 1: MAUP -->
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#C8963A;display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:1.4em;font-weight:800;color:#fff;">3</span>
+            </div>
+            <div>
+              <p style="font-size:0.72em;font-weight:700;margin:0;">Scale sensitivity (MAUP)</p>
+              <p style="font-size:0.62em;color:var(--text-secondary);margin:0.15em 0 0 0;line-height:1.45;">Tested at 30m, 60m, 90m. At 60m the model loses <strong>17%</strong> of explained variance; it falls between radiative and advective physics. 30m is the right scale.</p>
+            </div>
+          </div>
+
+          <!-- Row 2, Col 2: Moran's I -->
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:#4A8C5C;display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:1.4em;font-weight:800;color:#fff;">4</span>
+            </div>
+            <div>
+              <p style="font-size:0.72em;font-weight:700;margin:0;">Residual autocorrelation</p>
+              <p style="font-size:0.62em;color:var(--text-secondary);margin:0.15em 0 0 0;line-height:1.45;">Moran&rsquo;s I confirms significant spatial clustering in predictions (I&nbsp;=&nbsp;0.66&ndash;0.92, p&lt;0.001), validating why spatial blocking was essential.</p>
+            </div>
+          </div>
+
+          <!-- Row 3, spanning full width: Stability -->
+          <div style="grid-column:1/-1;display:flex;align-items:flex-start;gap:16px;background:var(--bg-secondary);border-radius:8px;padding:12px 18px;">
+            <div style="flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--text-tertiary);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:1.4em;font-weight:800;color:#fff;">5</span>
+            </div>
+            <div style="display:flex;gap:2em;flex:1;align-items:center;">
+              <div>
+                <p style="font-size:0.72em;font-weight:700;margin:0;">Stability &amp; tuning</p>
+                <p style="font-size:0.62em;color:var(--text-secondary);margin:0.15em 0 0 0;line-height:1.45;">5 random seeds (&sigma;R&sup2;&nbsp;=&nbsp;0.064). 200 Bayesian trials optimised 820 trees, depth 6, lr 0.03. Features: 165 base &rarr; 189 with spatial lags &rarr; 118 after correlation filter (|r|&gt;0.92).</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="key-finding" style="margin-top:0.4em;">The model learns morphology, not spatial patterns.</p>
+        <div class="slide-ref">Oke et al. (2017) <em>Urban Climates</em>. &middot; Openshaw (1984) MAUP. &middot; Anselin (1995) Moran&rsquo;s I. &middot; Roberts et al. (2017) Spatial CV. &middot; Valavi et al. (2018) blockCV.</div>
+        <aside class="notes">
+          [5:10 — 35s]
+
+          Five validation checks. Spatial cross-validation with 600-metre blocks — the model never sees neighbours during training. City-demeaned targets isolate urban form effects, not climate. Scale sensitivity: 60m loses 17% variance — 30m is the right resolution. Moran's I confirms the model learns morphology, not spatial proximity.
+
+          [Q&A: MAUP = sensitivity to aggregation. 30m → 40,344 cells, 60m → ~10K, 90m → ~4.5K. Multi-seed σ(R²) = 0.064. 300m lag from Oke's advective transport (2-3 m/s). 820 trees, depth 6, lr 0.03.]
+
+          [Q&A: "Wind?" — Indirect: (1) 300m spatial lags, (2) street betweenness as ventilation proxy, (3) SVF for canyon ventilation. Direct wind is a next step.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 10: MODEL PERFORMANCE + SPATIAL VALIDATION -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 12: MODEL PERFORMANCE -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span class="current">How</span><span>Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span class="active">Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Can We Predict Heat Across Contexts?</h2>
+        <h2>Does It Work Across Contexts?</h2>
         <div class="split-slide">
           <div class="split-text">
             <table class="results-table" style="font-size:0.8em;">
@@ -468,144 +508,115 @@
                 <tr><th>City</th><th>R&sup2;</th><th>RMSE</th></tr>
               </thead>
               <tbody>
-                <tr class="highlight-row"><td style="border-left:3px solid var(--accent);">Paris</td><td>0.932</td><td>0.51&deg;C</td></tr>
-                <tr class="highlight-row"><td style="border-left:3px solid var(--accent);">Barcelona</td><td>0.926</td><td>0.84&deg;C</td></tr>
+                <tr class="highlight-row"><td style="border-left:3px solid var(--accent);">Paris</td><td>0.932</td><td>0.49&deg;C</td></tr>
+                <tr class="highlight-row"><td style="border-left:3px solid var(--accent);">Barcelona</td><td>0.926</td><td>0.85&deg;C</td></tr>
                 <tr><td>Amsterdam</td><td>0.880</td><td>0.44&deg;C</td></tr>
-                <tr style="opacity:0.75;font-style:italic;"><td>Athens *</td><td>0.730</td><td>0.68&deg;C</td></tr>
-                <tr><td>Berlin</td><td>0.727</td><td>0.68&deg;C</td></tr>
-                <tr><td>Madrid</td><td>0.718</td><td>1.58&deg;C</td></tr>
+                <tr style="opacity:0.75;font-style:italic;"><td>Athens *</td><td>0.730</td><td>0.63&deg;C</td></tr>
+                <tr><td>Berlin</td><td>0.727</td><td>0.66&deg;C</td></tr>
+                <tr><td>Madrid</td><td>0.718</td><td>1.53&deg;C</td></tr>
               </tbody>
             </table>
-            <p class="fragment fade-up stat-line" style="margin-top:0.6em;">Paris and Barcelona lead (R&sup2; &gt; 0.92). Athens is the honest exception.</p>
-            <p class="fragment fade-up" style="font-size:0.65em;color:var(--text-secondary);margin-top:0.4em;">Honest exception: Athens R&sup2; <em>drops</em> from 0.751 to 0.730 (&minus;2.8%). Topographic basin effects override climate-zone correction.</p>
+            <p class="key-finding" style="font-size:0.72em;margin-top:0.5em;">The model works, but accuracy isn&rsquo;t the finding. What the model <em>reveals about what drives heat</em> is.</p>
+            <p style="font-size:0.6em;color:var(--text-secondary);margin-top:0.3em;">* Athens R&sup2; drops with blending (&minus;2.8%): its topographic basin overrides climate-zone correction. That&rsquo;s not a failure; it&rsquo;s a finding. Geography matters.</p>
           </div>
-          <div class="split-image fragment fade-up">
+          <div class="split-image">
             <img src="assets/uhi_blend_panels.png" alt="Observed vs predicted UHI spatial comparison across cities">
           </div>
         </div>
-        <div class="slide-ref">Chen, T. &amp; Guestrin, C. (2016) XGBoost, <em>KDD</em>. &middot; Tanoori, B. et al. (2024) ML for UHI prediction benchmarks. &middot; Zhang, Y. et al. (2025) Multi-city UHI modelling.</div>
+        <div class="slide-ref">Chen &amp; Guestrin (2016) XGBoost, <em>KDD</em>. &middot; Tanoori et al. (2024) ML for UHI benchmarks.</div>
         <aside class="notes">
-          R² of 0.93 in Paris and Barcelona, down to 0.72 in Madrid. The hierarchical blend improves the global model by 22%.
+          [5:45 — 30s]
 
-          [CLICK] Spatial comparison confirms real patterns. Centre-periphery in Paris, coastal cooling in Barcelona, basin trapping in Athens.
+          Paris and Barcelona: R-squared above 0.92. The hierarchical blend cuts prediction error by 48%. Honest exception: blending hurts Athens — its topographic basin overrides climate-zone correction. That's not a failure; it's a scope condition. Geography matters.
 
-          Honest exception: blending hurts Athens. R² drops from 0.751 to 0.730. Topographic basin overrides climate-zone correction. That's a scope condition, not a failure.
+          But accuracy isn't the finding. What the model reveals about what drives heat — that's the finding.
 
-          But model performance isn't the finding. What the model reveals about what drives heat — that's the finding.
+          [CHECKPOINT: ~6 min. On track for 15-minute delivery.]
 
-          [BRIDGE] The model works. Now the question becomes: what does it see?
-
-          [Q&A REFERENCE: Global model alone R² = 0.795. Hierarchical blend pushes to 0.840 — cutting unexplained variance by 22%. That improvement comes entirely from respecting geographic context. The architecture IS the finding. Full RMSE: overall 0.85°C, range Paris 0.68°C to Madrid 1.12°C. Target variable distributions: Barcelona σ=3.13°C, Madrid σ=2.89°C (widest — easiest to predict). Amsterdam σ≈1.2°C, Athens σ≈1.2°C (narrowest — hardest to predict). Athens blending: topographic basin creates katabatic flows (cold air drainage from mountains) and thermal inversions overriding climate-zone correction. Scope condition: basin cities need terrain-stratified sub-models. Madrid: semi-arid drought stress creates soil moisture dynamics morphological features can't capture. Vegetation effectiveness depends on irrigation — not in the model. If asked "does R²=0.73 in Athens mean the model is wrong?": 27% unexplained — likely terrain effects, sea breeze channelling, thermal inversions. Neighbourhood-level relative rankings still informative for screening.]
+          [Q&A: Athens elevation SHAP = 0.12 — terrain is first-order control. Madrid RMSE 1.53°C — semi-arid drought stress beyond morphological features. 5-fold spatial CV, 600m blocks, no leakage, anomaly-based.]
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE 11: THE SURPRISE - SHAP (KEY SLIDE) -->
+      <!-- ACT 3: WHAT WE FOUND -->
       <!-- ============================================================ -->
+
+      <!-- SLIDE 13: SHAP - WHAT DRIVES HEAT (KEY SLIDE) -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span class="active">Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
         <h2>What Actually Drives Urban Heat?</h2>
         <div class="split-slide">
           <div class="split-text">
-            <div class="shap-hierarchy">
-              <div class="shap-item">
-                <span class="shap-bar shap-surface"></span>
-                <span class="shap-label"><strong>Surface characteristics</strong>: 21%</span>
-              </div>
-              <div class="shap-item">
-                <span class="shap-bar shap-water"></span>
-                <span class="shap-label"><strong>Water features</strong>: 13.2%</span>
-              </div>
-              <div class="shap-item">
-                <span class="shap-bar shap-veg"></span>
-                <span class="shap-label"><strong>Vegetation</strong>: 7.0%</span>
-              </div>
-            </div>
-            <p class="fragment fade-up key-finding">De-sealing matters <strong class="accent">3&times; more</strong> than tree planting.</p>
-            <p class="fragment fade-up" style="font-size:0.72em;color:var(--text-secondary);margin-top:0.5em;">Trees provide shade, biodiversity, air quality. But for <em>temperature reduction</em>, the surface is the stronger lever.</p>
+            <img src="assets/diagrams/desealing_energy_v1.png" alt="Energy balance diagram showing how sealed surfaces trap heat versus permeable surfaces enabling evaporative cooling" style="max-height:42vh;width:100%;object-fit:contain;border-radius:8px;margin-bottom:0.5em;">
+            <p class="key-finding">De-sealing matters <strong class="accent">3&times; more</strong> than tree planting.</p>
+            <p style="font-size:0.72em;color:var(--text-secondary);margin-top:0.5em;">Trees provide shade, biodiversity, air quality. But for <em>temperature reduction</em>, the surface is the stronger lever.</p>
           </div>
           <div class="split-image">
             <img src="assets/shap_target_uhi_raw_global.png" alt="Global SHAP feature importance beeswarm plot">
           </div>
         </div>
-        <div class="slide-ref">Lundberg &amp; Lee (2017) SHAP values. &middot; Schwaab, J. et al. (2021) Trees 8-12&deg;C cooler in Central Europe, <em>Nature Communications</em>. &middot; Eyni, A. et al. (2025) Distributional outcomes of UHI reduction, <em>Scientific Reports</em>.</div>
+        <div class="slide-ref">Lundberg &amp; Lee (2017) SHAP. &middot; Schwaab et al. (2021) <em>Nat. Comms.</em> &middot; Eyni et al. (2025) <em>Scientific Reports</em>.</div>
         <aside class="notes">
-          [SLOW DOWN]
+          [6:15 — 50s. SLOW DOWN — central finding.]
 
-          SHAP decomposes each prediction. The hierarchy: surface characteristics 21%. Water features 13%. Vegetation just 7%.
+          SHAP decomposes every prediction into feature contributions. The hierarchy surprises: surface permeability 21%, water features 13%, vegetation just 7%. De-sealing matters three times more than tree planting for temperature reduction.
 
-          [PAUSE — let the inversion land]
+          The physics: permeable ground allows evaporation, absorbing heat. Seal the surface, all that energy warms the air instead.
 
-          Surface permeability matters three times more than vegetation for temperature reduction. The physical mechanism is well established: permeable ground lets water evaporate, which absorbs heat. Seal the surface, and all that energy warms the air instead. Our SHAP results are consistent with this mechanism.
+          This does not mean stop planting trees. Trees provide shade, biodiversity, air quality. But for temperature — de-seal first.
 
-          This doesn't mean trees don't matter. They provide shade, biodiversity, air quality. But for temperature reduction, de-sealing is the stronger lever.
+          [Q&A: 21%/7% = top-2 features per category. Full categories: surface 34%, vegetation 14% = 2.4:1. If challenged: "Either way surface dominates." Top features: NDBI |SHAP| = 0.321, impervious_300m = 0.289. Bowen ratio: impervious >5, permeable 0.5-1.5. SHAP assumes independence; NDBI-impervious r = 0.76. Category hierarchy robust.]
 
-          And this hierarchy shifts by climate zone. In the Mediterranean, albedo dominates. In temperate cities, impervious fraction. The same intervention produces fundamentally different outcomes depending on where you apply it.
-
-          [Q&A DEPTH: 21%/7% uses top two features per category. Full categories: surface 34%, vegetation 14%, ratio ~2.4:1. Top individual features: NDBI |SHAP|=0.321, impervious_300m=0.289, water_distance=0.245, NDVI=0.198, building_density=0.176. Physics: impervious surfaces have Bowen ratio >5 (nearly all energy into sensible heat). Permeable vegetated surfaces: Bowen ratio 0.5-1.5 (30-50% into latent heat). Transitioning from 95% to 50% imperviousness shifts the energy balance fundamentally. 300m optimal radius: buffer optimisation showed impervious effects peak at 300m (SHAP=0.321 at 300m vs 0.085 at 90m, 0.067 at 150m). Aligns with Oke 2017 advective transport under 2-3 m/s winds. Schwaab et al. 2021, 293 cities — evapotranspiration efficiency depends on vapour pressure deficit. DESIGN RULE: SHAP dependence plots show interaction — high imperviousness hurts most when SVF is also high (open plazas: full solar exposure, no shade, no evaporative pathway). In deep canyons (low SVF), shadow already reduces surface heating, so permeability matters less. Open plazas → de-seal first. Narrow streets → shade first. If asked "does framework distinguish types of permeability?": No. Permeable paving, rain gardens, pocket parks, bioswales all register as reduced imperviousness. Translating "reduce imperviousness by 50%" into specific design is architectural judgment — the handoff point. SHAP caveat: assumes feature independence in attribution, but urban variables correlate (NDBI and impervious fraction r=0.76). Category-level hierarchy (surface > water > vegetation) is robust. Individual feature redistribution within categories has uncertainty.]
+          [AUDIENCE: Daniela Rizzi (NbS, ICLEI) may challenge. Response: "Not anti-trees. Cost-effective strategy includes +20% canopy. Trees provide shade, biodiversity, air quality de-sealing cannot. The hierarchy is about temperature specifically. Complementary, not competing." Eyni et al. 2025 confirms diversified depaving outperforms tree-only.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 12: GEOGRAPHY CHANGES EVERYTHING -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 14: GEOGRAPHY CHANGES EVERYTHING (KEY SLIDE) -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span class="active">Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Geography Changes Everything</h2>
-        <div class="split-slide">
-          <div class="split-text">
-            <div class="climate-zone-list">
-              <div>
-                <h3>Temperate Oceanic (Cfb)</h3>
-                <p class="city-names">Paris, Berlin, Amsterdam</p>
-                <p>&rarr; Impervious surface fraction dominates</p>
-              </div>
-              <div>
-                <h3>Mediterranean (Csa)</h3>
-                <p class="city-names">Athens, Barcelona</p>
-                <p>&rarr; Albedo and built-up index dominate</p>
-              </div>
-              <div>
-                <h3>Semi-arid transitional (Csa/BSk)</h3>
-                <p class="city-names">Madrid</p>
-                <p>&rarr; Drought stress amplifies impervious heating</p>
-              </div>
-            </div>
-            <p class="fragment fade-up key-finding">Geographic contingency isn&rsquo;t noise. It&rsquo;s the signal.</p>
+        <h2 style="margin-bottom:4px;">Geography Changes Everything</h2>
+        <div style="display:flex;gap:12px;align-items:stretch;width:100%;height:740px;">
+          <div style="flex:1 1 0;display:flex;flex-direction:column;align-items:center;min-width:280px;">
+            <img src="assets/shap_target_uhi_raw_temperate_oceanic_cfb.png" alt="SHAP importance for Temperate oceanic" style="max-width:100%;max-height:100%;flex:1;object-fit:contain;border-radius:4px;">
           </div>
-          <div class="split-image" style="flex-direction:column;gap:0.5em;">
-            <img src="assets/shap_target_uhi_raw_mediterranean_dry_summer_csa.png" alt="SHAP importance for Mediterranean climate zone" style="max-height:38vh;">
-            <img src="assets/shap_target_uhi_raw_temperate_oceanic_cfb.png" alt="SHAP importance for Temperate oceanic climate zone" style="max-height:38vh;">
-            <p class="fig-caption">Top: Mediterranean (Csa) &middot; Bottom: Temperate Oceanic (Cfb)</p>
+          <div style="flex:0 0 680px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="border-radius:8px;">
+              <img src="assets/diagrams/climate_context_v2.png" alt="Climate context diagram" style="width:100%;">
+            </div>
+            <p class="key-finding" style="font-size:0.55em;margin-top:8px;">Geographic contingency isn&rsquo;t noise.<br>It&rsquo;s the signal.</p>
+          </div>
+          <div style="flex:1 1 0;display:flex;flex-direction:column;align-items:center;min-width:280px;">
+            <img src="assets/shap_target_uhi_raw_mediterranean_dry_summer_csa.png" alt="SHAP importance for Mediterranean" style="max-width:100%;max-height:100%;flex:1;object-fit:contain;border-radius:4px;">
           </div>
         </div>
-        <div class="slide-ref">Schwaab et al. (2021) Climate-zone cooling variation, <em>Nat. Comms.</em> &middot; Giannopoulou et al. (2011) Athens basin topography. &middot; Stewart &amp; Oke (2012) LCZ, <em>BAMS</em>.</div>
+        <div class="slide-ref">Schwaab et al. (2021) <em>Nat. Comms.</em> &middot; Giannopoulou et al. (2011) Athens basin. &middot; Stewart &amp; Oke (2012) LCZ.</div>
         <aside class="notes">
-          Same model, same features, but the SHAP hierarchy shifts by climate zone. Mediterranean: albedo and built-up index dominate. Temperate: impervious fraction.
+          [7:05 — 40s. Pause deliberately before "the signal."]
 
-          Each city needs a different intervention strategy. One-size-fits-all guidance ignores this.
+          Same model, same features — but the SHAP hierarchy shifts by climate. Mediterranean: albedo and built-up index dominate. Temperate: impervious fraction. Each city needs its own strategy. One-size-fits-all guidance fails.
 
-          [BRIDGE] We know what drives heat and how it varies. Now: where does heat meet people?
+          This is AI Localism in practice — the model calibrates itself to local context. Geographic contingency isn't noise. [PAUSE] It's the signal.
 
-          [Q&A REFERENCE: Athens's topographic basin traps circulation. Athens elevation SHAP=0.12 — terrain is a first-order control other cities don't face. Amsterdam's canals flatten water proximity as a predictor because 90% of cells are already near water. Madrid's semi-arid climate amplifies drought stress effects. Cross-city SHAP variation: vegetation importance varies 3× between Mediterranean (low — moisture-constrained) and temperate (higher — evapotranspiration effective). This is not an intercept shift — it's a fundamentally different feature interaction structure. That's why hierarchical blending outperforms a single global model with climate dummies. EU policy implication: current frameworks (European Climate Pact, Covenant of Mayors) provide generic "increase urban greening" guidance. Geographic shift evidence argues for climate-zone-specific toolkits: different intervention priorities, different budget allocations, different performance targets. Tree-first makes sense in Berlin; de-sealing-first makes sense in Barcelona.]
+          [Q&A: Athens elevation SHAP = 0.12 — basin creates katabatic flows and thermal inversions. Vegetation importance varies 3× between Mediterranean (moisture-constrained) and temperate (evapotranspiration effective). Different feature interaction structures, not just an intercept shift. EU "increase urban greening" guidance ignores this.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE: HOTSPOT CLASSIFICATION - Methodology -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 15: CLASSIFYING HOTSPOTS -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span class="active">Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Classifying Hotspots</h2>
+        <h2>From Temperature to Risk: Classifying Hotspots</h2>
         <div class="split-slide">
           <div class="split-text">
-            <p>Hotspots = cells significantly above the city's typical temperature</p>
+            <p style="font-size:0.72em;color:var(--text-secondary);margin-bottom:0.3em;">The regression tells us <em>how hot</em> each cell is. But planners need to know <em>which areas are dangerously hot</em>. That&rsquo;s a classification problem: we turn continuous temperature into a binary risk flag.</p>
             <ul style="font-size:0.75em;">
               <li>XGBoost classification, upweighted to catch rare hotspots</li>
               <li>Calibrated probabilities: when the model says 0.7, it means 70%</li>
               <li>Threshold set to catch <strong>at least 60%</strong> of real hotspots</li>
             </ul>
-            <div class="stat-callout fragment fade-up" style="margin:0.6em 0;">
+            <div class="stat-callout" style="margin:0.6em 0;">
               <div class="stat-number">AUC 0.911</div>
               <div class="stat-desc">6,389 of 40,344 cells (15.8%) classified as hotspots<br>Athens: 30.8% vs Paris: 7.2%</div>
             </div>
@@ -616,88 +627,98 @@
         </div>
         <div class="slide-ref">Chen &amp; Guestrin (2016) XGBoost. &middot; Platt, J. (1999) Probabilistic outputs for SVMs. &middot; Santamouris, M. (2020) Heat vulnerability.</div>
         <aside class="notes">
-          Now: classifying hotspots. We use a robust statistical threshold that adapts to each city's temperature distribution. The classifier is calibrated: when it says 70% risk, it means 70%. Overall AUC = 0.911. Athens flags nearly a third of its area; Paris, under 8%.
+          [7:45 — 35s]
 
-          [Q&A DEPTH: Hotspot = any cell exceeding 1 MAD above city median (MAD scaled by 1.4826 for Gaussian equivalence ≈ +1σ) — more robust to outliers than standard deviation. XGBoost classification with 1.5x minority weighting (hotspots only 15.8% of cells). Platt scaling: logistic regression on held-out predictions to calibrate probabilities. Threshold set at 0.30 for ≥60% recall. F1 = 0.616, Precision = 56.3%, Recall = 68.0%. Trade-off: flag some non-hotspots rather than miss real ones. Fold-level AUC: 0.949, 0.924, 0.932, 0.894, 0.858. Madrid Fold 5 = 0.511 — near random, scope condition for semi-arid instability. Hotspot prevalence by city: Athens 30.8%, Amsterdam 20.5%, Berlin 13.3%, Madrid 11.6%, Barcelona 11.6%, Paris 7.2%.]
+          From prediction to classification. We threshold at 1 MAD above city median — adapts to each city's distribution. Platt-calibrated probabilities: when it says 70%, it means 70%. Overall AUC 0.911. Athens flags nearly a third of its area; Paris under 8%.
+
+          [Q&A: Hotspot = >1 MAD above median (×1.4826 ≈ +1σ). 1.5× minority weighting. Threshold 0.30 for ≥60% recall. F1 = 0.616. Fold AUCs: 0.949, 0.924, 0.932, 0.894, 0.858. Madrid Fold 5 = 0.511 — scope condition.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE: RISK TIERS -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 16: WHERE HEAT MEETS VULNERABILITY -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span class="active">Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Risk Tiers Across Cities</h2>
-        <div class="split-slide">
-          <div class="split-text" style="flex:0.35;">
-            <p style="font-size:0.75em;">Five tiers combining <strong>heat intensity</strong> with <strong>cooling potential</strong>:</p>
-            <ul style="font-size:0.65em;color:var(--text-secondary);margin-top:0.3em;">
-              <li><strong class="accent">Severe</strong>: extreme heat + high vulnerability</li>
-              <li><strong>Very high</strong>: extreme heat + medium, or high + high</li>
-              <li><strong>High</strong>: high heat + medium/low</li>
-              <li>Moderate &middot; Baseline</li>
-            </ul>
-            <p class="fragment fade-up" style="font-size:0.7em;margin-top:0.5em;">These tiers feed directly into <strong>priority zone scoring</strong> for the scenario grid search.</p>
+        <h2 style="margin-bottom:0.1em;">Where Heat Meets Vulnerability</h2>
+        <div style="display:flex;gap:1em;align-items:center;height:740px;">
+          <!-- Left: generated diagram -->
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <img src="assets/diagrams/hotspot_vulnerability_v1.png" alt="Temperature prediction to hotspot classification: demographics leap to #1" style="max-width:100%;max-height:520px;object-fit:contain;border-radius:6px;">
+            <p class="key-finding" style="font-size:0.6em;margin-top:0.4em;">When classifying <em>hotspots</em>, <strong class="accent">child density</strong> becomes #1. ~<strong>2&times;</strong> higher hotspot probability in vulnerable areas.</p>
           </div>
-          <div class="split-image" style="flex:0.65;">
-            <img src="assets/risk_tiers_panels.png" alt="Risk tier classification across six European cities" style="max-height:72vh;object-fit:contain;">
+          <!-- Right: priority zones map -->
+          <div style="flex:0.85;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <img src="assets/priority_zones_spatial.png" alt="Priority intervention zones across six cities" style="max-width:100%;max-height:580px;object-fit:contain;border-radius:8px;">
+            <p style="font-size:0.48em;color:var(--text-tertiary);margin-top:6px;">Priority: Heat risk <strong>(40%)</strong> + Vulnerability <strong>(35%)</strong> + Cooling potential <strong>(25%)</strong></p>
           </div>
         </div>
-        <div class="slide-ref">Marginean, R. et al. (2024) High-resolution heat vulnerability projections. &middot; Hoffman et al. (2020) Historical housing and heat inequality.</div>
+        <div class="slide-ref">Santamouris (2020) Heat vulnerability. &middot; Kovats &amp; Hajat (2008) <em>Annu. Rev. Public Health</em>. &middot; Hoffman et al. (2020) Heat inequality.</div>
         <aside class="notes">
-          Spatial risk tiers across all six cities. Severe risk concentrates in dense urban cores. Athens: nearly a third in the highest tier. These feed directly into priority zone scoring. But the tiers alone don't tell the full story.
+          [8:20 — 40s. SHIFT TONE — equity pivot.]
+
+          Something surprising. When we classify hotspots, the feature ranking inverts. Child density displaces morphological features as the top predictor. Approximately two times higher hotspot probability in vulnerable areas.
+
+          Hotspots aren't just where heat is generated — they're where vulnerable people experience it. The priority zones on the right combine heat risk, vulnerability, and cooling potential. Athens: 78% priority. Paris: 44%.
+
+          [Q&A: Priority zones: 15,734 cells (39%). Children: higher surface-area-to-mass ratio, lower sweat rates. Weights 40/35/25: analytical judgment, stable across ±10%. Tunable by municipalities.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 15: WHO'S MOST AT RISK - Hotspots + Priority Zones -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 16b: INTERVENTION FRAMEWORK — HOW WE TEST PRESCRIPTIONS -->
       <section data-transition="slide">
-        <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span class="active">Classification</span><span class="pipe-arrow">&rarr;</span><span>Scenarios</span></div>
-        <h2>Who&rsquo;s Most At Risk?</h2>
-        <div class="split-slide">
-          <div class="split-text">
-            <p class="fragment fade-up key-finding">When we classify <em>hotspots</em> rather than predict temperature, the ranking inverts. <strong class="accent">Demographic vulnerability</strong> (children and elderly density) becomes the #1 predictor.</p>
-            <div class="stat-callout fragment fade-up" style="margin:0.6em 0;">
-              <div class="stat-number">2.3&times;</div>
-              <div class="stat-desc">higher hotspot probability in<br>high-vulnerability areas</div>
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
+        <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span class="active">Scenarios</span></div>
+        <h2 style="margin-bottom:0.1em;">How We Test Interventions</h2>
+        <div style="display:flex;gap:1.2em;align-items:center;height:740px;">
+          <!-- Left: diagram -->
+          <div style="flex:1.1;display:flex;align-items:center;justify-content:center;">
+            <img src="assets/diagrams/intervention_grid_v1.png" alt="Counterfactual scenario grid search: 4 levers × 648 combinations → re-predict → convergence on 50% de-sealing" style="max-width:100%;max-height:700px;object-fit:contain;border-radius:8px;">
+          </div>
+          <!-- Right: compact key points -->
+          <div style="flex:0.55;display:flex;flex-direction:column;gap:0.6em;">
+            <div style="background:var(--bg-secondary);border-radius:8px;padding:0.5em 0.7em;">
+              <p style="font-size:0.55em;font-weight:700;margin:0 0 0.2em 0;">Process per scenario</p>
+              <p style="font-size:0.5em;margin:0;color:var(--text-secondary);line-height:1.6;">
+                Modify features in <strong>priority zones</strong> (top 10%)<br>
+                Re-predict with blend model<br>
+                Compute cooling &Delta; vs. baseline<br>
+                Rank by cooling <em>and</em> cost-effectiveness
+              </p>
             </div>
-            <p class="fragment fade-up" style="font-size:0.75em;">Priority zone scoring: Heat risk <strong>(40%)</strong> + Demographic vulnerability <strong>(35%)</strong> + Cooling potential <strong>(25%)</strong></p>
-            <p class="fragment fade-up key-finding">Hotspots aren&rsquo;t just where heat is generated. They&rsquo;re where <strong>vulnerable people experience it</strong>.</p>
-          </div>
-          <div class="split-image" id="priority-map-container" aria-label="Interactive map showing priority intervention zones across six European cities">
-            <img src="assets/priority_zones_spatial.png" alt="Priority intervention zones across six cities">
+            <div style="background:#fff3cd;border-left:4px solid #ffc107;border-radius:4px;padding:0.5em 0.7em;">
+              <p style="font-size:0.52em;font-weight:700;margin:0 0 0.2em 0;">&#9888; Limitations</p>
+              <p style="font-size:0.48em;margin:0;color:#664d03;line-height:1.5;">
+                <strong>Correlation &ne; causation</strong>: predictions are hypotheses for field validation<br><br>
+                <strong>Feature correlation</strong>: impervious &amp; vegetation (r&approx;&minus;0.7) partially double-count cooling
+              </p>
+            </div>
+            <p class="key-finding" style="font-size:0.55em;margin:0;">All 5 objectives converge &rarr; <strong class="accent">50% de-sealing</strong></p>
           </div>
         </div>
-        <div class="slide-ref">Santamouris, M. (2020) Heat vulnerability and thermoregulation. &middot; Kovats &amp; Hajat (2008) Heat stress and public health, <em>Annu. Rev. Public Health</em>. &middot; Hoffman et al. (2020) Historical housing and heat inequality.</div>
+        <div class="slide-ref">Counterfactual grid: itertools.product over 4 levers, bootstrapped 500&times;. Priority zones: 40% heat + 35% vulnerability + 25% cooling potential.</div>
         <aside class="notes">
-          [SHIFT TONE — this is the equity pivot]
+          [9:00 — 40s]
 
-          Now something surprising. When we classify hotspots, the feature ranking shifts. Child density displaces morphological features as the top predictor. Areas with high vulnerability: 2.3 times higher hotspot probability.
+          How do we go from diagnosis to prescription? Four levers: de-sealing, vegetation, tree canopy, albedo. 648 combinations, each bootstrapped 500 times.
 
-          [PAUSE — 3 seconds. Let this land.]
+          [POINT to limitations box] Two honest caveats. First: correlation, not causation — these are hypotheses for field validation. Second: correlated features may double-count some cooling when you de-seal and plant on the same surface.
 
-          The model captures where heat meets vulnerability. Dense, older fabric with less green space is where families concentrate. Priority zones weight vulnerability at 35%.
+          Despite this, every objective function converges on the same anchor.
 
-          Hotspots aren't just where heat is generated. They're where vulnerable people experience it.
-
-          [BRIDGE] We know where heat is, who it affects. Now: what do we do about it?
-
-          [Q&A DEPTH: Feature ranking inversion quantified: child density |SHAP| = 0.182, total population density = 0.156, impervious surface drops to third (0.089) in classification model. This means: for predicting WHERE heat is, surface properties dominate. For predicting WHERE HEAT IS DANGEROUS, demographics dominate. Vulnerability tier: z-scored within each city (local patterns, not cross-city income differences). Low = z ≤ 0, Medium = 0 < z ≤ 0.8, High = z > 0.8. Combined index = max(children_z, elderly_z). Priority zone composition: total 15,734 cells (39.0%). Athens 5,248 (78.2%), Paris 2,875 (43.7%), Amsterdam 2,422 (35.6%), Berlin 2,100 (30.2%), Barcelona 1,684 (25.3%), Madrid 1,405 (20.9%). Priority zone characteristics vs citywide: mean UHI anomaly +0.73°C vs −0.25°C, 93.6% impervious vs 77.2%, 3.0% tree canopy vs 7.2%. Thermoregulation: Children have higher surface-area-to-mass ratio, lower sweat rates, less behavioural adaptation. Elderly: chronic conditions, medication effects (diuretics, beta-blockers impair thermoregulation), reduced mobility. Kovats and Hajat 2008. If asked "why those specific weights (40/35/25)?": analytical judgment, not empirical optimum. Sensitivity testing: rankings stable across ±10% weight variation. Different municipalities could weight differently — that's a democratic decision.]
+          [Q&A: "Why max 50%?" — Physically plausible target from literature. Grid can't discover beyond bounds. "Bootstrap 500×?" — CIs ±0.04°C reflect model uncertainty, not real-world. "Why top 10%?" — Focus resources where heat, vulnerability, and cooling potential intersect. Weights 40/35/25 stable across ±10%.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE: THE 50% REGIME BOUNDARY (KEY SLIDE) -->
-      <!-- ============================================================ -->
+      <!-- SLIDE 17: THE 50% REGIME BOUNDARY (KEY SLIDE) -->
       <section data-transition="fade">
+        <div class="act-marker"><span>Why</span><span>How</span><span class="current">Findings</span><span>Action</span></div>
         <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span class="active">Scenarios</span></div>
         <h2>The 50% Regime Boundary</h2>
         <div class="split-slide">
           <div class="split-text">
-            <p style="font-size:0.72em;color:var(--text-secondary);">Four levers tested across priority zones: depaving (30-50%) &middot; vegetation (+10-50%) &middot; tree canopy (+15-50%) &middot; albedo (+0-20%) = <strong>648 combinations</strong>, each bootstrapped 500 times.</p>
-            <p class="fragment fade-up" style="margin-top:0.5em;">All optimal strategies converge on <strong class="accent">50% de-sealing</strong>. Below this threshold, evaporative cooling pathways become viable, a <strong>regime transition</strong>.</p>
-            <table class="results-table fragment fade-up" style="font-size:0.78em;">
+            <p style="font-size:0.72em;color:var(--text-secondary);">We know <em>where</em> hotspots are and <em>what</em> drives heat. Now the prescription question: <strong>how much change is enough?</strong> We tested four levers in a full grid search: depaving (30-50%) &middot; vegetation (+10-50%) &middot; tree canopy (+15-50%) &middot; albedo (+0-20%) = <strong>648 combinations</strong>, each bootstrapped 500 times.</p>
+            <p style="margin-top:0.5em;">All optimal strategies converge on <strong class="accent">50% de-sealing</strong>. Below this threshold, evaporative cooling pathways become viable &mdash; a <strong>threshold effect</strong>.</p>
+            <table class="results-table" style="font-size:0.78em;">
               <thead>
                 <tr><th>Strategy</th><th>Depaving</th><th>Vegetation</th><th>Trees</th><th>Albedo</th><th>Cooling</th></tr>
               </thead>
@@ -706,301 +727,458 @@
                 <tr class="highlight-row"><td><strong>Cost-effective</strong></td><td><strong>50%</strong></td><td><strong>+10%</strong></td><td><strong>+20%</strong></td><td><strong>0%</strong></td><td><strong>&minus;1.20&deg;C</strong></td></tr>
               </tbody>
             </table>
-            <p class="fragment fade-up key-finding"><strong>95%</strong> of maximum cooling with substantially fewer vegetation and albedo inputs.</p>
+            <p class="key-finding"><strong>95%</strong> of maximum cooling with substantially fewer resources.</p>
           </div>
-          <div class="split-image">
-            <img src="assets/shap_dependence_impervious_300m.png" alt="SHAP dependence plot showing impervious fraction threshold at 300m" style="max-height:65vh;border-radius:8px;">
+          <div class="split-image" style="flex-direction:column;gap:0.5em;">
+            <img src="assets/shap_dependence_impervious_300m.png" alt="SHAP dependence plot showing impervious fraction threshold at 300m" style="max-height:38vh;border-radius:8px;">
+            <img src="assets/diagrams/regime_boundary_v1.png" alt="Regime boundary diagram illustrating the nonlinear cooling response at 50% de-sealing threshold where evaporative cooling pathways become viable" style="max-height:38vh;border-radius:8px;">
           </div>
         </div>
-        <div class="slide-ref">Oke, T.R. et al. (2017) Surface energy balance regime transitions, <em>Urban Climates</em>. &middot; Gunawardena et al. (2017) Evaporative cooling pathways, <em>Sci. Total Environ.</em></div>
+        <div class="slide-ref">Oke et al. (2017) <em>Urban Climates</em>. &middot; Gunawardena et al. (2017) <em>Sci. Total Environ.</em></div>
         <aside class="notes">
-          [THIS IS THE POLICY-RELEVANT SLIDE — deliver clearly]
+          [9:40 — 50s. POLICY SLIDE — deliver clearly.]
 
-          We tested 648 combinations of four levers. Each bootstrapped 500 times.
+          648 combinations. Every optimal strategy converges on 50% de-sealing. The response is non-linear: 30% gets half the cooling, but 50% unlocks the full threshold where evapotranspiration becomes viable.
 
-          Every optimal strategy converges on 50% de-sealing. The response is non-linear: the SHAP dependence structure shows a clear inflection around 50% sealed surface, consistent with the regime boundary Oke et al. describe where permeable area enables evapotranspiration.
+          The cost-effective strategy: 95% of maximum cooling with far fewer resources. Those confidence intervals overlap — statistically equivalent. You don't need the kitchen sink. De-seal, add modest vegetation, and you're there.
 
-          The cost-effective strategy — 50% depaving, modest vegetation, 20% trees, no albedo treatment — achieves 95% of maximum cooling with substantially fewer resources. Those confidence intervals overlap.
+          [IF CHALLENGED on feasibility]: "We're not asking cities to tear up streets overnight. We're asking them to make different choices when they resurface — which happens on a 10-15 year cycle."
 
-          [BRIDGE] That's the universal finding. But each city's baseline is different.
+          [Q&A: Max −1.27°C (CI 1.23-1.31). Cost-effective −1.20°C (CI 1.16-1.24). CIs overlap. SHAP dependence inflection at ~50%, consistent with Oke's regime boundary. These are hypotheses for field validation, not causal claims.]
 
-          [Q&A DEPTH: Four levers: impervious surface reduction at 30%, 40%, 50%; vegetation increase 10-50% in 5% steps; tree canopy 15-50%; albedo 0%, 10%, 20%. Non-linear response: 30% depaving = 49% of maximum cooling, 40% = 71%, 50% = 100%. Max: −1.27°C (95% CI: 1.23-1.31°C). Cost-effective: −1.20°C (95% CI: 1.16-1.24°C). CIs overlap → not statistically different at α=0.05. "Cost-effective" is a proxy: de-sealing during routine maintenance cycles is cheaper than establishing mature tree canopy (15-20 years to maturity, irrigation). No actual €/m² cost function — that's a limitation and future work. Regime boundary physics: below 50% sealed, sufficient permeable surface enables 30-50% of absorbed solar energy to redirect from sensible to latent heat. Above 50%, evaporative pathways too fragmented for continuous cooling. Aligns with "sponge city" threshold concepts. Extreme filter: predictions >5°C change removed (~21% of all predictions, ~8% in core urban — rest peripheral/industrial where extrapolation is most severe). COUNTERFACTUAL VALIDITY: model learns correlations from current configurations, not causal consequences of changing them. Setting imperviousness from 95% to 50% is extrapolation — limited training examples of 50%-impervious cells in dense urban cores. Predictions are hypotheses, not guarantees. True validation requires pilot de-sealing projects with before-after monitoring. If asked "is 50% realistic in heritage European cores?": probably not everywhere (underground infrastructure, heritage protections). But the non-linear response means even 30% delivers 49% — meaningful even where 50% is impossible. De-sealing can phase into routine infrastructure maintenance. If asked "does threshold shift with canyon geometry?": threshold emerges from global model pooling all morphologies. Mediterranean cities likely need lower thresholds (higher solar loads). Threshold is central tendency, not universal constant. ±5°C plausibility filter.]
+          [Q&A DEPAVING FEASIBILITY — see comprehensive reference in Q&A slide notes.]
+
+          [CHECKPOINT: ~10:30]
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE: WHAT SHOULD EACH CITY DO? - Prescriptions + Cooling -->
+      <!-- ACT 4: WHAT TO DO -->
       <!-- ============================================================ -->
+
+      <!-- SLIDE 18: CITY PRESCRIPTIONS -->
       <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span>Findings</span><span class="current">Action</span></div>
         <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span class="active">Scenarios</span></div>
-        <h2>What Should Each City Do?</h2>
-        <div class="split-slide">
-          <div class="split-text">
-            <p style="font-size:0.72em;color:var(--text-secondary);margin-bottom:0.6em;">Cooling potential scales with how sealed the city is. The more concrete, the more room to gain:</p>
-            <table class="scope-table fragment fade-up" style="font-size:0.7em;">
-              <thead>
-                <tr><th>City</th><th>Cooling</th><th>What to prioritise</th></tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>Athens</strong></td><td>&minus;1.45&deg;C</td><td>De-seal the basin floor</td></tr>
-                <tr><td><strong>Barcelona</strong></td><td>&minus;1.31&deg;C</td><td>Open up sealed courtyards</td></tr>
-                <tr><td><strong>Paris</strong></td><td>&minus;1.22&deg;C</td><td>De-seal the dense core</td></tr>
-                <tr><td><strong>Berlin</strong></td><td>&minus;1.08&deg;C</td><td>Distribute across multiple centres</td></tr>
-                <tr><td><strong>Amsterdam</strong></td><td>&minus;0.92&deg;C</td><td>Surface materials and albedo</td></tr>
-                <tr><td><strong>Madrid</strong></td><td>&minus;0.89&deg;C</td><td>Cool roofs + drought-tolerant planting</td></tr>
-              </tbody>
-            </table>
-            <p class="fragment fade-up key-finding" style="margin-top:0.5em;font-size:0.75em;">Same anchor everywhere: de-seal first. The supporting levers change by city.</p>
-          </div>
-          <div class="split-image">
-            <img src="assets/temperature_reduction_map.png" alt="Predicted cooling from cost-effective intervention">
-          </div>
-        </div>
-        <div class="slide-ref">Gunawardena et al. (2017) Blue-green mitigation, <em>Sci. Total Environ.</em> &middot; Giannopoulou et al. (2011) Athens basin. &middot; Lemus-C&aacute;novas et al. (2020) Barcelona sea-breeze.</div>
-        <aside class="notes">
-          Athens gains the most cooling, 1.45 degrees, because it starts from the worst baseline: 95% impervious, nearly 80% flagged as priority. Amsterdam gains the least, 0.92 degrees, because its canal network already saturates water cooling. The other four fall between these poles, each visible in the table. Cooling scales with baseline imperviousness.
+        <h2 style="margin-bottom:0.1em;">What Should Each City Do?</h2>
+        <p style="font-size:0.5em;color:var(--text-secondary);margin:0 0 0.3em 0;">Same anchor everywhere: <strong>de-seal first</strong>. Supporting levers change by climate and morphology.</p>
 
-          One scope note: this framework screens neighbourhoods. Street-section design — material selection, tree placement, shade geometry — requires sub-30m tools. Complementary scales.
+        <div style="display:flex;gap:18px;align-items:center;height:760px;">
+          <!-- Left: 6 city cards in 2×3 compact grid -->
+          <div style="flex:0.85;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:center;">
 
-          [Q&A REFERENCE: Per-city detail — Athens (1.45°C): 95.2% impervious, 78.2% priority. Attica Basin traps heat but also means interventions have maximum impact — nowhere for additional heat to go, so removing sources yields big returns. Sea breeze from Saronic Gulf creates corridors that de-sealing can amplify. Barcelona (1.31°C): 94.7% impervious. Coastal-hill interface creates sea-breeze corridors. Eixample block interiors are prime de-sealing targets — current courtyards often paved. Paris (1.22°C): strong centre-periphery gradient. Core de-sealing extends Seine corridor cooling into dense Right Bank neighbourhoods. Haussmann's uniform canyon geometry means predictable intervention responses. Berlin (1.08°C): polycentric structure, no single heat core. Distributed intervention strategy needed. Impervious fraction is dominant driver across all sub-centres. Amsterdam (0.92°C): 90% of cells within 200m of water. Canal network caps cooling. Primary lever: building material albedo and surface permeability in non-canal areas. Madrid (0.89°C): fewest priority zones (20.9%). Existing tree canopy (21.7%) already buffers. Semi-arid climate means vegetation interventions need drought-tolerant species — water-intensive greening counterproductive (Schwaab findings). Albedo modification (cool roofs/pavements) may be more effective than vegetation in this climate.]
-        </aside>
-      </section>
-
-      <!-- ============================================================ -->
-      <!-- SLIDE 17: BLUE-GREEN SYNERGY & CO-BENEFITS -->
-      <!-- ============================================================ -->
-      <section data-transition="slide">
-        <div class="pipeline-stage"><span>Regression</span><span class="pipe-arrow">&rarr;</span><span>Classification</span><span class="pipe-arrow">&rarr;</span><span class="active">Scenarios</span></div>
-        <h2>Blue-Green Synergy &amp; Co-Benefits</h2>
-        <div class="split-slide">
-          <div class="split-text">
-            <p style="font-size:0.82em;">One intervention, four resilience domains:</p>
-            <ul style="font-size:0.78em;">
-              <li><strong class="accent">Cooler streets</strong> &mdash; permeable ground lets water evaporate, absorbing heat that sealed surfaces would radiate back</li>
-              <li><strong class="accent">Fewer floods</strong> &mdash; rain infiltrates instead of overwhelming drains. The same de-sealed surface handles both heat and stormwater</li>
-              <li><strong class="accent">More life</strong> &mdash; soil and root systems return, supporting urban biodiversity where concrete allowed none</li>
-              <li><strong class="accent">Water security</strong> &mdash; infiltration recharges aquifers, critical for drought-prone cities like Madrid</li>
-            </ul>
-            <p class="fragment fade-up key-finding" style="margin-top:0.5em;">This isn&rsquo;t &ldquo;stop planting trees.&rdquo; It&rsquo;s &ldquo;invest in the surface beneath, not just the canopy above.&rdquo;<br>
-            <span style="font-size:0.75em;font-weight:normal;">The cost-effective strategy <em>still includes</em> +20% tree canopy. Trees provide shade, biodiversity, and air quality that de-sealing cannot replace.</span></p>
-          </div>
-          <div class="split-image">
-            <div class="stat-callout" style="text-align:left;">
-              <div class="stat-number" style="font-size:1.6em;margin-bottom:0.4em;">One surface, four wins</div>
-              <div class="stat-desc" style="font-size:0.85em;line-height:1.8;">
-                <span style="color:var(--accent);">&darr;</span> Street temperatures<br>
-                <span style="color:var(--accent);">&darr;</span> Flood risk<br>
-                <span style="color:var(--accent);">&uarr;</span> Urban biodiversity<br>
-                <span style="color:var(--accent);">&uarr;</span> Groundwater recharge
+            <!-- Athens -->
+            <div style="background:linear-gradient(135deg,#fff5f5,#fff);border-left:4px solid #C4513A;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Athens <span style="font-size:0.7em;background:#C4513A;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Csa</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#C4513A;line-height:1.1;">&minus;1.45&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">95% sealed &middot; 78% priority</div>
               </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. permeable paving in basin-floor neighbourhoods like Omonia</p>
             </div>
+
+            <!-- Barcelona -->
+            <div style="background:linear-gradient(135deg,#fff5f5,#fff);border-left:4px solid #C4513A;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Barcelona <span style="font-size:0.7em;background:#C4513A;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Csa</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#C4513A;line-height:1.1;">&minus;1.31&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">95% sealed &middot; 25% priority</div>
+              </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. opening sealed Eixample courtyards, Superblocks-style depaving</p>
+            </div>
+
+            <!-- Paris -->
+            <div style="background:linear-gradient(135deg,#f0f7f7,#fff);border-left:4px solid #2A7F6F;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Paris <span style="font-size:0.7em;background:#2A7F6F;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Cfb</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#2A7F6F;line-height:1.1;">&minus;1.22&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">94% sealed &middot; 44% priority</div>
+              </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. OASIS schoolyard depaving, extending Seine corridor cooling</p>
+            </div>
+
+            <!-- Berlin -->
+            <div style="background:linear-gradient(135deg,#f0f7f7,#fff);border-left:4px solid #2A7F6F;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Berlin <span style="font-size:0.7em;background:#2A7F6F;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Cfb</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#2A7F6F;line-height:1.1;">&minus;1.08&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">94% sealed &middot; 30% priority</div>
+              </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. Schwammstadt sponge-city approach in polycentric cores</p>
+            </div>
+
+            <!-- Amsterdam -->
+            <div style="background:linear-gradient(135deg,#f0f7f7,#fff);border-left:4px solid #2A7F6F;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Amsterdam <span style="font-size:0.7em;background:#2A7F6F;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Cfb</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#2A7F6F;line-height:1.1;">&minus;0.92&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">93% sealed &middot; 36% priority</div>
+              </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. cool surfaces + permeable paving (canals already cap water cooling)</p>
+            </div>
+
+            <!-- Madrid -->
+            <div style="background:linear-gradient(135deg,#fdf8f0,#fff);border-left:4px solid #C8963A;border-radius:6px;padding:10px 14px;display:flex;align-items:center;gap:14px;">
+              <div style="flex-shrink:0;">
+                <div style="font-size:0.55em;font-weight:800;">Madrid <span style="font-size:0.7em;background:#C8963A;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:600;">Csa/BSk</span></div>
+                <div style="font-size:1.15em;font-weight:800;color:#C8963A;line-height:1.1;">&minus;0.89&deg;C</div>
+                <div style="font-size:0.34em;color:var(--text-tertiary);">91% sealed &middot; 21% priority</div>
+              </div>
+              <p style="font-size:0.46em;margin:0;line-height:1.3;color:var(--text-secondary);border-left:1px solid #eee;padding-left:12px;">e.g. cool roofs + drought-tolerant planting (avoid water-intensive greening)</p>
+            </div>
+
+          </div>
+
+          <!-- Right: cooling potential map (larger) -->
+          <div style="flex:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <img src="assets/temperature_reduction_map.png" alt="Predicted cooling from cost-effective intervention" style="max-width:100%;max-height:730px;object-fit:contain;border-radius:8px;">
+            <p style="font-size:0.45em;color:var(--text-tertiary);margin-top:6px;">Predicted cooling from cost-effective strategy</p>
           </div>
         </div>
-        <div class="slide-ref">Gunawardena et al. (2017) Blue-green infrastructure, <em>Sci. Total Environ.</em> &middot; Oke et al. (2017) Surface energy balance, <em>Urban Climates</em>.</div>
+        <div class="slide-ref">Gunawardena et al. (2017) <em>Sci. Total Environ.</em> &middot; Giannopoulou et al. (2011) Athens basin.</div>
         <aside class="notes">
-          One intervention, four resilience domains. The same de-sealed surface that cools the street also absorbs stormwater, supports biodiversity, and recharges aquifers. Cities pursuing flood and heat resilience can achieve both with the same budget line.
+          [10:30 — 40s. Don't read every card — point to contrasts.]
 
-          This isn't "stop planting trees." Trees provide shade, biodiversity, air quality — functions de-sealing cannot replace. The cost-effective strategy still includes 20% tree canopy. It's about investing in the surface beneath, not just the canopy above.
+          Athens gains the most — minus 1.45 degrees — because it starts worst: 95% sealed, 78% priority. Amsterdam the least, because canals already saturate water cooling.
 
-          [Q&A REFERENCE: Co-benefits of de-sealing: restores evaporative cooling (heat), improves stormwater infiltration (flooding), enables soil biota (biodiversity), recharges aquifers (water security). Single intervention, four resilience domains — "sponge city" framework alignment. Amsterdam illustrates diminishing returns of water: 90% of cells within 200m of water, yet still has hotspots. Once water proximity saturates, the intervention lever shifts to building materials and surface permeability. Currently most cities invest heavily in tree planting while ignoring the surface beneath. Eyni et al. 2025: independently confirmed diversified depaving outperforms tree-only strategies for reducing heat-related health disparities — corroborates the SHAP hierarchy from a health equity angle.]
+          Mediterranean cities cluster at the top. Oceanic in the middle. Madrid is the outlier — semi-arid, so water-intensive greening would be counterproductive. Each card has cooling potential and priority percentage — policy makers see their headroom instantly.
+
+          [Q&A: Athens 95.2% impervious, basin traps heat. Barcelona: Eixample interiors are prime targets — Bárbara Pons Giner in audience. Amsterdam: 90% cells within 200m of water. Madrid: existing canopy 21.7%, drought-tolerant species needed. "Why Athens most?" — Highest sealing + Mediterranean amplification + basin. "Why Madrid least?" — Existing canopy + semi-arid limits evaporative headroom.]
+        </aside>
+      </section>
+
+      <!-- SLIDE 19: CO-BENEFITS & EQUITY -->
+      <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span>Findings</span><span class="current">Action</span></div>
+        <h2>Co-Benefits &amp; Equity Safeguards</h2>
+        <div class="split-slide">
+          <div class="split-text" style="flex:1.1;">
+            <img src="assets/diagrams/cobenefits_v2.png" alt="Co-benefits diagram: de-sealing produces cooler streets, fewer floods, more biodiversity, water security" style="max-height:50vh;width:100%;object-fit:contain;border-radius:8px;margin-bottom:0.5em;">
+            <p style="font-size:0.72em;color:var(--text-secondary);margin-top:0.3em;">The cost-effective strategy <em>still includes</em> +20% tree canopy. This isn't "stop planting trees". It's "invest in the surface beneath, not just the canopy above."</p>
+          </div>
+          <div class="split-text" style="flex:0.7;min-width:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="background:#fff3cd;border-left:4px solid #ffc107;border-radius:4px;padding:0.6em 0.8em;margin-bottom:0.6em;">
+              <p style="font-size:0.65em;font-weight:700;margin:0 0 0.2em 0;">&#9888; Green gentrification risk</p>
+              <p style="font-size:0.58em;margin:0;color:#664d03;line-height:1.5;">Greening raises property values and can displace the people it aims to protect. Documented in Barcelona Superblocks and NYC&rsquo;s High Line.</p>
+            </div>
+            <p style="font-size:0.65em;color:var(--text-secondary);margin:0 0 0.4em 0;">Our vulnerability weighting (35%) targets current vulnerable populations, but the model can&rsquo;t prevent market dynamics. <strong>That requires policy.</strong></p>
+            <p class="key-finding" style="font-size:0.68em;margin:0;">The model says <em>where</em>. Communities decide <em>how</em>.</p>
+          </div>
+        </div>
+        <div class="slide-ref">Gunawardena et al. (2017) <em>Sci. Total Environ.</em> &middot; Anguelovski et al. (2019) Green gentrification. &middot; Hoffman et al. (2020) Heat inequality. &middot; Eyni et al. (2025) <em>Scientific Reports</em>.</div>
+        <aside class="notes">
+          [11:10 — 35s]
+
+          De-sealing delivers four wins: cooler streets, fewer floods, more biodiversity, groundwater recharge. One surface intervention, four outcomes.
+
+          But — [POINT to warning box] cooling investments without anti-displacement policies risk improving places while displacing people. The model says where. Communities decide how. This is responsible AI by design — governance embedded, not bolted on.
+
+          [AUDIENCE: If Daniela Rizzi raises NbS: "De-sealing creates the soil conditions that make NbS viable. You can't plant into sealed ground. We're building the foundation for your NbS programme."]
+
+          [Q&A: Anguelovski 2019: greening → property values → displacement. Barcelona Superblocks and NYC High Line documented this. Policy: rent stabilisation, community land trusts, participatory budgeting.]
+        </aside>
+      </section>
+
+      <!-- SLIDE 20: THREE TAKEAWAYS -->
+      <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span>Findings</span><span class="current">Action</span></div>
+        <h2 style="margin-bottom:0.2em;">Three Insights for Urban Heat Policy</h2>
+        <div style="display:flex;gap:1.5em;width:100%;align-items:stretch;">
+          <div style="flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;">
+            <img src="assets/diagrams/transport_300m_v2.png" alt="300m neighbourhood scale" style="max-height:38vh;border-radius:6px;margin-bottom:0.3em;">
+            <span class="takeaway-num">1</span>
+            <h3 style="font-size:0.72em;margin:0.1em 0;">Heat is a neighbourhood problem</h3>
+            <p style="font-size:0.55em;">Cooling propagates <strong>300 m</strong> under wind. Coordinated action across blocks, not plots.</p>
+          </div>
+          <div style="flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;">
+            <img src="assets/diagrams/desealing_energy_v1.png" alt="De-sealing 3:1 ratio" style="max-height:38vh;border-radius:6px;margin-bottom:0.3em;">
+            <span class="takeaway-num">2</span>
+            <h3 style="font-size:0.72em;margin:0.1em 0;">Surface matters more than canopy</h3>
+            <p style="font-size:0.55em;">Permeability drives <strong class="accent">3&times; more</strong> cooling than vegetation. De-sealing deserves equal investment.</p>
+          </div>
+          <div style="flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;">
+            <img src="assets/diagrams/climate_context_v2.png" alt="Cfb vs Csa climate context" style="max-height:38vh;border-radius:6px;margin-bottom:0.3em;">
+            <span class="takeaway-num">3</span>
+            <h3 style="font-size:0.72em;margin:0.1em 0;">Every city needs its own strategy</h3>
+            <p style="font-size:0.55em;">Same tree cools 8&ndash;12&deg;C in Berlin but 0&ndash;4&deg;C in Athens. Geography is the signal.</p>
+          </div>
+        </div>
+        <div class="slide-ref">Oke et al. (2017) 300m advective transport. &middot; Schwaab et al. (2021) <em>Nat. Comms.</em> &middot; Eyni et al. (2025) Diversified depaving reduces health disparities more than tree-only.</div>
+        <aside class="notes">
+          [11:45 — 40s. SLOW DOWN. Number them vocally with a beat between each.]
+
+          Three insights for policy.
+
+          First: heat is a neighbourhood problem. Cooling one plot while surrounding blocks stay sealed achieves very little. Three hundred metres — that's the scale of coordinated action.
+
+          Second: de-sealing drives three times more cooling than tree planting, yet gets a fraction of urban greening budgets.
+
+          Third: every city needs its own strategy. The same tree cools 8-12 degrees in Berlin but barely 4 in Athens. Geographic contingency is the signal.
+
+          [Q&A: 300m from Oke 2017 advective transport at 2-3 m/s. Eyni et al. 2025 confirms diversified depaving outperforms tree-only for health disparities.]
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE 20: EQUITY -->
+      <!-- SLIDE: LIMITATIONS -->
       <!-- ============================================================ -->
       <section data-transition="slide">
-        <div class="section-marker">So What?</div>
-        <h2>Who Benefits? Who Gets Displaced?</h2>
-        <p>Cooling interventions risk <strong class="accent">green gentrification</strong>, improving places while displacing people.</p>
-        <p class="fragment fade-up">Priority zones often coincide with historically disinvested neighbourhoods.</p>
-        <p class="fragment fade-up" style="font-size:0.72em;color:var(--text-secondary);margin-top:0.3em;">Historically redlined neighbourhoods: <strong class="accent">+4&deg;C</strong> hotter (Hoffman et al. 2020)</p>
-        <div class="fragment fade-up" style="display:flex;gap:1em;margin-top:0.6em;">
-          <div class="gap-item" style="flex:1;">
-            <h3 class="accent">Rent Stabilisation</h3>
-            <p>Freeze rents in intervention zones to prevent displacement during and after cooling upgrades.</p>
-          </div>
-          <div class="gap-item" style="flex:1;">
-            <h3 class="accent">Inclusive Planning</h3>
-            <p>Cooling improvements should come with safeguards so existing residents benefit, not get priced out.</p>
-          </div>
-          <div class="gap-item" style="flex:1;">
-            <h3 class="accent">Participatory Governance</h3>
-            <p>Residents co-design interventions. The model identifies <em>where</em>, communities decide <em>how</em>.</p>
-          </div>
-        </div>
-        <p class="fragment fade-up key-finding"><strong>Technical optimisation without equity safeguards is incomplete.</strong></p>
-        <div class="slide-ref">Anguelovski, I. et al. (2019) Green gentrification mechanisms. &middot; Eyni, A. et al. (2025) Distributional outcomes of UHI reduction, <em>Scientific Reports</em>. &middot; Hoffman et al. (2020) Historical housing and heat inequality.</div>
-        <aside class="notes">
-          The framework identifies where to intervene. It cannot prevent green gentrification. Cooling investments without anti-displacement policies risk improving places while displacing people. Hoffman et al.: historically redlined neighbourhoods are up to 4 degrees hotter.
-
-          Technical optimisation without equity safeguards is incomplete. That's a governance question this analysis raises but cannot answer.
-
-          [Q&A REFERENCE: Anguelovski et al. 2019 documented the mechanisms: greening → property value increase → rent escalation → displacement of low-income renters. Barcelona's Superblocks and New York's High Line both documented displacement effects alongside environmental benefits. Hoffman et al. 2020: historically redlined US neighbourhoods experience surface temperatures up to 4°C higher than non-redlined districts. Structural racism encoded in urban morphology. European equivalents: social housing peripheries, immigrant-concentration districts. Policy instruments: rent stabilisation/control, community land trusts (CLTs), participatory budgeting for intervention prioritisation, inclusionary zoning, anti-displacement ordinances triggered by environmental investment thresholds. Framework contribution: vulnerability weighting (35%) ensures priority zones are where vulnerable people live now. But weighting can't prevent market dynamics after intervention. Policy safeguards must be concurrent with physical interventions, not sequential.]
-        </aside>
-      </section>
-
-      <!-- ============================================================ -->
-      <!-- SLIDE 21: THREE TAKEAWAYS -->
-      <!-- ============================================================ -->
-      <section data-transition="slide">
-        <h2>Three Insights for Urban Heat Policy</h2>
-        <div class="takeaway fragment fade-right" data-fragment-index="1">
-          <span class="takeaway-num">1</span>
-          <div>
-            <h3>Heat is a neighbourhood problem</h3>
-            <p>Cooling propagates <strong>300 metres</strong> under normal wind conditions. Effective intervention requires coordinated action across blocks, not isolated plots.</p>
-          </div>
-        </div>
-        <div class="takeaway fragment fade-right" data-fragment-index="2">
-          <span class="takeaway-num">2</span>
-          <div>
-            <h3>The surface matters more than the canopy</h3>
-            <p>Surface permeability drives <strong class="accent">3&times; more</strong> cooling than vegetation. De-sealing deserves the same investment priority that tree planting currently receives.</p>
-          </div>
-        </div>
-        <div class="takeaway fragment fade-right" data-fragment-index="3">
-          <span class="takeaway-num">3</span>
-          <div>
-            <h3>Every city needs its own strategy</h3>
-            <p>The same tree cools 8-12&deg;C in Berlin but only 0-4&deg;C in Athens. What works depends on where you are.</p>
-          </div>
-        </div>
-        <div class="slide-ref">Oke et al. (2017) 300m advective transport scale. &middot; Schwaab et al. (2021) Climate-zone cooling variation, <em>Nat. Comms.</em> &middot; Eyni et al. (2025) Depaving &gt; tree-only strategies.</div>
-        <aside class="notes">
-          Three insights. One: heat is a neighbourhood problem — it propagates 300 metres, so cooling one plot while surrounding blocks stay sealed achieves very little. Two: the surface matters more than the canopy — de-sealing drives three times more cooling than vegetation, yet gets a fraction of the budget. Three: every city needs its own strategy — the same tree cools 8 degrees in Berlin and near zero in Athens.
-
-          [Q&A REFERENCE: Scale mismatch: Oke 2017 documents advective transport under typical 2-3 m/s winds propagates cooling effects 300-500 metres. Heat doesn't respect cadastral boundaries. Wrong priority: Eyni et al. 2025 confirmed independently — diversified depaving outperforms tree-only strategies for reducing health disparities. No universal template: Schwaab et al. found identical tree species cool 8-12°C Central Europe, 0-4°C Mediterranean. Continental, Mediterranean, and maritime cities need fundamentally different strategies. One-size-fits-all guidance — the default mode of EU adaptation policy — ignores geographic contingency.]
-        </aside>
-      </section>
-
-      <!-- ============================================================ -->
-      <!-- SLIDE 22: LIMITATIONS -->
-      <!-- ============================================================ -->
-      <section data-transition="slide">
+        <div class="act-marker"><span>Why</span><span>How</span><span>Findings</span><span class="current">Action</span></div>
         <h2>What This Framework Cannot Do</h2>
-        <ul style="font-size:0.85em;">
-          <li class="fragment fade-right"><strong>Daytime only</strong>: Landsat passes at 10:30 AM, not nighttime when mortality peaks</li>
-          <li class="fragment fade-right"><strong>Correlations, not causes</strong>: the 50% threshold needs field validation before policy</li>
-          <li class="fragment fade-right"><strong>30m resolution</strong>: screens neighbourhoods, not individual streets</li>
-          <li class="fragment fade-right"><strong>Uneven coverage</strong>: street-level imagery covers 29&ndash;71% by city</li>
-        </ul>
-        <p class="fragment fade-up" style="margin-top: 0.6em;font-size:0.85em;color:var(--text-secondary);">
-          But: <strong class="accent">satellite features alone carry most of the signal</strong>. Any city with access to free satellite data can run this pipeline tomorrow.
+        <div style="display:flex;gap:1.5em;align-items:flex-start;margin-top:0.5em;">
+          <ul style="font-size:0.82em;flex:1;">
+            <li style="margin-bottom:0.5em;"><strong>Daytime only</strong>: Landsat passes at 10:30 AM, not nighttime when mortality peaks</li>
+            <li style="margin-bottom:0.5em;"><strong>Correlations, not causes</strong>: the 50% threshold needs field validation before policy</li>
+            <li style="margin-bottom:0.5em;"><strong>30m resolution</strong>: screens neighbourhoods, not individual streets</li>
+            <li><strong>Uneven coverage</strong>: street-level imagery covers 29&ndash;71% by city</li>
+          </ul>
+        </div>
+        <p style="margin-top:0.8em;font-size:0.82em;color:var(--text-secondary);">
+          But: GEE features hold the <strong class="accent">top 8 SHAP positions</strong> &mdash; satellite data alone carries most of the signal. Any city with free Landsat access can run this pipeline tomorrow.
         </p>
-        <p class="fragment fade-up key-finding" style="margin-top: 0.6em;">
+        <p class="key-finding" style="margin-top:0.6em;">
           Waiting for perfect evidence while heatwaves kill thousands is itself a policy choice.
         </p>
         <div class="slide-ref">Oke et al. (2017) Diurnal UHI cycle, <em>Urban Climates</em>. &middot; Cheval et al. (2024) Research gaps, <em>Climate Risk Management</em>. &middot; Voogt &amp; Oke (2003) Thermal remote sensing.</div>
         <aside class="notes">
-          Two key scope conditions. Daytime only: Landsat captures 10:30 AM, not nighttime when mortality peaks. And correlations, not causes: the 50% threshold needs field validation.
+          [12:25 — 35s]
 
-          But: GEE satellite features dominate the SHAP rankings. A satellite-only pipeline captures most of the signal. Coverage beats sophistication.
+          Two key scope conditions. Daytime only — Landsat at 10:30 AM, not nighttime when mortality peaks. And correlations, not causes — the 50% threshold needs field validation before it becomes policy.
 
-          [PAUSE]
+          But: GEE features hold the top 8 SHAP positions. Satellite data alone carries most of the signal. Any city with free Landsat access can run this tomorrow. Coverage beats sophistication.
 
           These are real limitations. But waiting for perfect evidence while heatwaves kill thousands is itself a policy choice.
 
-          [Q&A REFERENCE: Landsat overpass: 10:30 local solar time. Peak surface temperature typically 13:00-15:00. Peak mortality risk occurs overnight (inability to thermoregulate during sleep). Framework maps 10:30 relative anomalies — neighbourhood rankings preserved (cells hot at 10:30 are generally hot at 15:00 and retain more heat overnight). But absolute magnitude of surface-to-air relationship varies with wind speed, humidity, canyon geometry. ECOSTRESS: finer temporal sampling including nighttime but coarser spatial resolution and inconsistent revisit — could complement, not replace Landsat. 50% threshold: analytically grounded (SHAP dependence structure) but awaits field validation — field-wide limitation, not unique to this study. Counterfactual validity: model learns statistical associations, not causal consequences of changing configurations. Extreme-prediction filter (>5°C) removes obvious failures. Rigorous validation requires pilot projects with before-after monitoring. Data coverage: GlobalStreetscapes 29-71% by city. Systematic not random — street-level platforms prioritise commercial/tourist/higher-property-value areas. Predictions least reliable where vulnerability concentrates. GEE dominance: satellite-derived features (NDBI, impervious fraction, NDVI, albedo) carry ~21% combined SHAP importance with 95-99% spatial coverage. Practical: a city without VoxCity or EUBUCCO can still run meaningful screening. GEE alone + XGBoost + SHAP = viable minimum pipeline. Anthropogenic heat gap: traffic, HVAC, cooking, industry absent from framework. Can add 20-50 W/m² in dense urban cores — comparable in magnitude to moderate de-sealing effects. Spatially comprehensive datasets don't exist across six cities. Global South transferability: methodology transfers but requires local recalibration. EUBUCCO Europe-only. Substitutes: OSM buildings (less accurate heights), Microsoft Building Footprints (Africa, SE Asia), Google Open Buildings. GEE features work globally. Extension requires local data partnerships and attention to informal settlement morphologies.]
+          [Q&A: Daytime rankings preserved at night (r > 0.7). ECOSTRESS could complement. GEE-only captures ~80% of signal. Framework sensor-agnostic — swap LST layer and it works.]
         </aside>
       </section>
 
       <!-- ============================================================ -->
-      <!-- SLIDE 23: CLOSING -->
+      <!-- SLIDE: CLOSING -->
       <!-- ============================================================ -->
       <section data-transition="fade">
-        <div class="closing-slide">
-          <div class="fragment fade-up" data-fragment-index="1" style="display:flex;justify-content:center;gap:2em;margin-bottom:2em;">
-            <span style="font-size:0.85em;color:var(--text-secondary);letter-spacing:0.05em;">Open data</span>
-            <span style="font-size:0.85em;color:var(--text-tertiary);">&middot;</span>
-            <span style="font-size:0.85em;color:var(--text-secondary);letter-spacing:0.05em;">Open tools</span>
-            <span style="font-size:0.85em;color:var(--text-tertiary);">&middot;</span>
-            <span style="font-size:0.85em;color:var(--text-secondary);letter-spacing:0.05em;">Open method</span>
-          </div>
-          <p class="fragment fade-up" data-fragment-index="2" style="font-size:2.4em;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0;">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:75vh;text-align:center;">
+          <p style="font-size:2.4em;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0;color:var(--text-primary);">
             Every city can start<br><span style="color:var(--accent);">shaping cooler cities</span><br>today.
+          </p>
+          <div style="width:80px;height:4px;background:var(--accent);border-radius:2px;margin:0.6em auto;"></div>
+          <p style="font-size:0.65em;color:var(--text-secondary);margin-top:0.3em;max-width:700px;">
+            Open data. Open tools. Open method.<br>61,000 deaths demand tools that work <em>now</em>, with data cities already have.
           </p>
         </div>
         <aside class="notes">
-          [Step back from podium. Hands at sides. Look at the audience, not the screen. Count slowly to three.]
+          [13:00 — 15s. HOLD 3 seconds. Let the line land. Don't read it.]
 
-          [CLICK — let the three words appear]
+          "We started with 61,000 deaths and a question: where should cities intervene? Now we have an answer — open, explainable, and ready to use."
 
-          [PAUSE 2 seconds — CLICK] Let the big line land. Don't read it aloud. Hold silence for 3 full seconds.
+          [PAUSE]
 
-          [CLICK — "Thank you." — nothing else.]
+          Thank you.
 
-          [Q&A REFERENCE: If asked "what would you do differently?": (1) Add nocturnal thermal dynamics via ECOSTRESS integration. (2) Higher-resolution sub-block modelling — combining 30m screening with street-section microclimate simulation (ENVI-met, RayMan). (3) Longitudinal field validation through pilot monitoring programmes. (4) Cost function integration for true cost-effectiveness (€/°C/m²). Product path vision: web interface where planner selects city → sees priority zones → adjusts intervention sliders → gets predicted cooling with equity overlays. If asked to compare with existing city heat action plans: most emphasise tree planting and reactive cooling centres. Framework argues for preventive de-sealing at neighbourhood scale. Barcelona's Superblocks partially aligns with de-sealing logic. Paris's Plan Climat emphasises canopy coverage targets. Berlin's Stadtentwicklungsplan Klima incorporates ventilation corridors (connects to network connectivity findings). GitHub repo: MIT licence, full pipeline code, feature engineering scripts, model training, SHAP analysis, scenario generation.]
+          [STOP. Don't add anything. Let the audience come to you.]
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 24: REFERENCES -->
-      <!-- ============================================================ -->
-      <section data-transition="fade">
-        <h2>References</h2>
-        <div class="references-list">
-          <p><span class="ref-number">[1]</span> Ballester, J. et al. (2023) &lsquo;Heat-related mortality in Europe during the summer of 2022&rsquo;, <em>Nature Medicine</em>, 29(7), pp. 1857-1866.</p>
-          <p><span class="ref-number">[2]</span> Oke, T.R. et al. (2017) <em>Urban Climates</em>. Cambridge: Cambridge University Press.</p>
-          <p><span class="ref-number">[3]</span> Lundberg, S. &amp; Lee, S.-I. (2017) &lsquo;A unified approach to interpreting model predictions&rsquo;, <em>NeurIPS</em>.</p>
-          <p><span class="ref-number">[4]</span> Schwaab, J. et al. (2021) &lsquo;The role of urban trees in reducing land surface temperatures in European cities&rsquo;, <em>Nature Communications</em>, 12, 6763.</p>
-          <p><span class="ref-number">[5]</span> Stewart, I.D. &amp; Oke, T.R. (2012) &lsquo;Local Climate Zones for urban temperature studies&rsquo;, <em>BAMS</em>, 93(12), pp. 1879-1900.</p>
-          <p><span class="ref-number">[6]</span> Gorelick, N. et al. (2017) &lsquo;Google Earth Engine&rsquo;, <em>Remote Sensing of Environment</em>, 202, pp. 18-27.</p>
-          <p><span class="ref-number">[7]</span> Fujiwara, K. et al. (2026) &lsquo;VoxCity: A seamless framework for open geospatial data integration, grid-based semantic 3D city model generation, and urban environment simulation&rsquo;, <em>Computers, Environment and Urban Systems</em>, 123, 102366.</p>
-          <p><span class="ref-number">[8]</span> Yap, W. et al. (2023) &lsquo;Urbanity: Automated modelling and analysis of multidimensional networks&rsquo;, <em>npj Urban Sustainability</em>.</p>
-          <p><span class="ref-number">[9]</span> Hou, Y. et al. (2024) &lsquo;Global Streetscapes: A comprehensive dataset of street-level imagery&rsquo;.</p>
-          <p><span class="ref-number">[10]</span> Anguelovski, I. et al. (2019) &lsquo;New scholarly pathways on green gentrification&rsquo;.</p>
-          <p><span class="ref-number">[11]</span> Gunawardena, K.R. et al. (2017) &lsquo;Utilising green and bluespace to mitigate UHI&rsquo;, <em>Sci. Total Environ.</em>, 584-585, pp. 1040-1055.</p>
-          <p><span class="ref-number">[12]</span> Li, X. et al. (2024) &lsquo;Cooling efficacy of urban trees: A synthesis of 182 studies&rsquo;.</p>
-          <p><span class="ref-number">[13]</span> Giannopoulou, K. et al. (2011) &lsquo;Summer UHI characteristics in Athens&rsquo;, <em>Sustain. Cities Soc.</em>, 1(1), pp. 16-28.</p>
-          <p><span class="ref-number">[14]</span> Santamouris, M. (2020) &lsquo;Recent progress on urban overheating and heat island research&rsquo;.</p>
-          <p><span class="ref-number">[15]</span> Marginean, R. et al. (2024) &lsquo;High-resolution modelling of heat vulnerability projections&rsquo;.</p>
-          <p><span class="ref-number">[16]</span> Hoffman, J.S. et al. (2020) &lsquo;Effects of historical housing policies on resident exposure to intra-urban heat&rsquo;, <em>Climate</em>, 8(1), 12.</p>
-          <p><span class="ref-number">[17]</span> Eyni, A. et al. (2025) &lsquo;Distributional outcomes of UHI reduction pathways&rsquo;, <em>Scientific Reports</em>, 15, 9594.</p>
-          <p><span class="ref-number">[18]</span> Camps-Valls, G. et al. (2025) &lsquo;AI for modelling extreme weather and climate events&rsquo;, <em>Nature Communications</em>, 16, 1919.</p>
-          <p><span class="ref-number">[19]</span> Li, X. et al. (2015) &lsquo;Assessing street-level urban greenery using Google Street View&rsquo;, <em>Landscape &amp; Urban Planning</em>.</p>
-          <p><span class="ref-number">[20]</span> Cheval, S. et al. (2024) &lsquo;Systematic review of UHI and heat waves research&rsquo;, <em>Climate Risk Management</em>, 44, 100603.</p>
-          <p><span class="ref-number">[21]</span> Li, D. et al. (2020) &lsquo;Influence of density and morphology on the UHI intensity&rsquo;.</p>
-          <p><span class="ref-number">[22]</span> Lemus-C&aacute;novas, M. et al. (2020) &lsquo;Estimating Barcelona&rsquo;s metropolitan UHI&rsquo;.</p>
-          <p><span class="ref-number">[23]</span> Sharston, R. et al. (2025) &lsquo;Urban morphology and UHI: Review of interactions&rsquo;.</p>
-          <p><span class="ref-number">[24]</span> Lei, B. et al. (2025) &lsquo;Developing urban comfort assessment with XAI&rsquo;.</p>
-          <p><span class="ref-number">[25]</span> Jim&eacute;nez-Mu&ntilde;oz, J.C. et al. (2014) &lsquo;Land surface temperature retrieval methods&rsquo;.</p>
-          <p><span class="ref-number">[26]</span> Biljecki, F. et al. (2015) &lsquo;Applications of 3D city models&rsquo;, <em>ISPRS Int. J. Geo-Inf.</em>, 4(4), pp. 2842-2889.</p>
-          <p><span class="ref-number">[27]</span> Chen, T. &amp; Guestrin, C. (2016) &lsquo;XGBoost: A scalable tree boosting system&rsquo;, <em>KDD</em>, pp. 785-794.</p>
-          <p><span class="ref-number">[28]</span> Voogt, J.A. &amp; Oke, T.R. (2003) &lsquo;Thermal remote sensing of urban climates&rsquo;, <em>Remote Sensing of Environment</em>, 86(3), pp. 370-384.</p>
-          <p><span class="ref-number">[29]</span> Kovats, R.S. &amp; Hajat, S. (2008) &lsquo;Heat stress and public health&rsquo;, <em>Annu. Rev. Public Health</em>, 29, pp. 41-55.</p>
-          <p><span class="ref-number">[30]</span> Zhang, Y. et al. (2025) &lsquo;Multi-city UHI modelling with gradient boosting ensembles&rsquo;.</p>
+      <!-- BACKUP: REFERENCES -->
+      <section class="backup-slide" data-background-color="#ffffff" data-transition="none">
+        <h2 style="font-size:1.3em;">References</h2>
+        <div style="columns:2;column-gap:2em;font-size:0.48em;text-align:left;line-height:1.6;color:var(--text-secondary);max-width:92%;margin:0 auto;">
+          <p>Anguelovski, I. et al. (2019) Green gentrification. <em>Landscape Urban Plan.</em></p>
+          <p>Ballester, J. et al. (2023) Heat-related mortality in Europe, summer 2022. <em>Nature Medicine</em>, 29(7), 1857&ndash;1866.</p>
+          <p>Ballester, J. et al. (2025) Heat-related mortality in Europe, summer 2024. <em>Nature Medicine</em>.</p>
+          <p>Camps-Valls, G. et al. (2025) AI for modeling and understanding extreme weather and climate events. <em>Nature Communications</em>, 16, 1919.</p>
+          <p>Chen, T. &amp; Guestrin, C. (2016) XGBoost. <em>Proc. ACM SIGKDD</em>, 785&ndash;794.</p>
+          <p>Cheval, S. et al. (2024) Systematic review of UHI. <em>Climate Risk Mgmt.</em>, 44.</p>
+          <p>Eyni, A. et al. (2025) Distributional outcomes of UHI reduction pathways. <em>Scientific Reports</em>, 15, 93896.</p>
+          <p>Fujiwara, K. et al. (2026) VoxCity: 3D city model generation. <em>Comput. Environ. Urban Syst.</em></p>
+          <p>Giannopoulou, K. et al. (2011) Athens urban heat island. <em>Climatic Change</em>, 104(3).</p>
+          <p>Gorelick, N. et al. (2017) Google Earth Engine. <em>Remote Sens. Environ.</em>, 202, 18&ndash;27.</p>
+          <p>Gunawardena, K. et al. (2017) Evaporative cooling in urban areas. <em>Sci. Total Environ.</em>, 590, 758&ndash;775.</p>
+          <p>Hoffman, J. S. et al. (2020) Historical housing policies and intra-urban heat. <em>Climate</em>, 8(1), 12.</p>
+          <p>Hou, Y. et al. (2024) GlobalStreetscapes. <em>ISPRS J. Photogramm.</em></p>
+          <p>Kovats, R.S. &amp; Hajat, S. (2008) Heat stress and public health. <em>Annu. Rev. Public Health</em>, 29.</p>
+          <p>Lundberg, S. &amp; Lee, S. (2017) SHAP values. <em>NeurIPS</em>, 30.</p>
+          <p>Milojevic-Dupont, N. et al. (2023) EUBUCCO. <em>Scientific Data</em>, 10, 146.</p>
+          <p>Oke, T.R. et al. (2017) <em>Urban Climates</em>. Cambridge University Press.</p>
+          <p>Santamouris, M. (2020) Heat vulnerability. <em>Energy and Buildings</em>.</p>
+          <p>Schwaab, J. et al. (2021) Urban trees reducing LST in European cities. <em>Nat. Comms.</em>, 12, 6763.</p>
+          <p>Seneviratne, S.I. et al. (2021) Extreme events in a changing climate. <em>IPCC AR6 WG1</em>, Ch. 11.</p>
+          <p>Stewart, I.D. &amp; Oke, T.R. (2012) Local Climate Zones. <em>BAMS</em>, 93(12), 1879&ndash;1900.</p>
+          <p>Yap, W. et al. (2023) Urbanity: automated modelling and analysis of multidimensional networks. <em>npj Urban Sustainability</em>, 3, 45.</p>
         </div>
-        <p style="font-size:0.45em;color:var(--text-tertiary);margin-top:0.8em;text-align:center;">Full bibliography: <code>github.com/gerardoezequiel/ShapingCoolCities</code></p>
         <aside class="notes">
-          This slide lists the key references cited throughout the presentation. The full bibliography with 100+ entries is available in the GitHub repository. If anyone wants the slides, these references and the full BibTeX file are included.
+          Full reference list. Available on request or in the dissertation repository.
         </aside>
       </section>
 
-      <!-- ============================================================ -->
-      <!-- SLIDE 25: DISCUSSION -->
-      <!-- ============================================================ -->
+      <!-- SLIDE: Q&A -->
       <section>
-        <h2 style="font-size:2.2em;margin-top:1.5em;">Any Questions?</h2>
-        <div style="margin-top:2.5em;font-size:0.65em;color:var(--text-secondary);line-height:2.2;">
-          <p><code>github.com/gerardoezequiel/ShapingCoolCities</code></p>
-          <p>gerardo.ezequiel.22@ucl.ac.uk</p>
-          <p>linkedin.com/in/gerardoezequielmc</p>
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:75vh;">
+          <h2 style="font-size:2.4em;color:var(--text-primary);margin-bottom:0.3em;">Questions?</h2>
+          <div style="width:60px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:1.2em;"></div>
+          <p style="font-size:0.65em;color:var(--text-secondary);margin-bottom:1.5em;">Open data &middot; Open tools &middot; Open method</p>
+          <div style="display:flex;gap:2.5em;margin-top:0.5em;">
+            <!-- GitHub -->
+            <a href="https://github.com/gerardoezequiel/ShapingCoolCities" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:0.5em;">
+              <div style="width:56px;height:56px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--text-secondary)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </div>
+              <span style="font-size:0.45em;color:var(--text-tertiary);">Code &amp; Data</span>
+            </a>
+            <!-- Email -->
+            <a href="mailto:gerardo.ezequiel.22@ucl.ac.uk" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:0.5em;">
+              <div style="width:56px;height:56px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--text-secondary)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <span style="font-size:0.45em;color:var(--text-tertiary);">gerardo.ezequiel.22@ucl.ac.uk</span>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/gerardoezequielmc" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:0.5em;">
+              <div style="width:56px;height:56px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--text-secondary)"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </div>
+              <span style="font-size:0.45em;color:var(--text-tertiary);">LinkedIn</span>
+            </a>
+          </div>
+          <p style="font-size:0.42em;color:var(--text-tertiary);margin-top:2em;letter-spacing:0.05em;">Gerardo Ezequiel Martin Carreno &middot; UCL CASA &middot; The Bartlett</p>
         </div>
         <aside class="notes">
-          Thank you. Happy to discuss any aspect - methodology, city-specific findings, data pipeline, or equity implications.
+          ═══════════════════════════════════════════════
+          PROJECT SUMMARY
+          ═══════════════════════════════════════════════
+
+          "Shaping Cool Cities" is a data-driven framework for diagnosing and prescribing urban heat interventions across six European cities (Amsterdam, Athens, Barcelona, Berlin, Madrid, Paris). It fuses 118 features from five open-source tools — Google Earth Engine, VoxCity, Urbanity, GlobalStreetscapes, EUBUCCO — into a three-stage pipeline: (1) XGBoost regression predicts UHI anomalies (blended R² = 0.841), (2) classification identifies hotspots (AUC = 0.911) weighted by vulnerability, (3) counterfactual scenario grid search tests 648 intervention combinations.
+
+          Key finding: surface permeability (de-sealing) drives 3× more cooling than vegetation alone. All optimal strategies converge on 50% de-sealing as the anchor intervention. The cost-effective strategy achieves 95% of maximum cooling. Geographic contingency — not noise — is the signal: the same intervention works differently in Mediterranean vs temperate climates.
+
+          ═══════════════════════════════════════════════
+          KEY NUMBERS AT A GLANCE
+          ═══════════════════════════════════════════════
+
+          • 40,344 grid cells, 30m resolution, 6 cities
+          • 118 features from 5 open-source tools
+          • Global R² = 0.695, Blended R² = 0.841
+          • Error reduction: 48% (unexplained variance 0.305 → 0.159)
+          • City R²: Paris 0.932, Barcelona 0.926, Amsterdam 0.880, Athens 0.730, Berlin 0.727, Madrid 0.718
+          • AUC = 0.911 (hotspot classification)
+          • 6,389 hotspot cells (15.8% of total)
+          • 15,734 priority zone cells (39%)
+          • SHAP: surface permeability 21%, water 13%, vegetation 7%
+          • 648 intervention combos, bootstrapped 500×
+          • Max cooling: −1.27°C. Cost-effective: −1.20°C (95% of max)
+          • Blend weights: global −0.151, Cfb +0.764, Csa +0.647
+
+          ═══════════════════════════════════════════════
+          COMMON QUESTIONS — PREPARED ANSWERS
+          ═══════════════════════════════════════════════
+
+          Q: "Why XGBoost and not deep learning?"
+          A: Three reasons. (1) SHAP TreeExplainer gives exact Shapley values; neural SHAP is approximate. (2) XGBoost matches/beats neural nets on tabular data (Grinsztajn et al. 2022). (3) 40K cells is modest for DL. Explainability over marginal accuracy.
+
+          Q: "This isn't causal."
+          A: Correct. The scenario grid generates testable hypotheses for field validation, not causal claims. XGBoost captures associations. Before-after monitoring is the next step. We're explicit about this in limitations.
+
+          Q: "Why not ENVI-met or CFD?"
+          A: CFD: one block in hours. We: 40,000 cells across 6 cities in one pipeline run. Complementary — our priority zones tell you WHERE to deploy detailed CFD.
+
+          Q: "How long for a new city?"
+          A: Under half a day with existing Landsat. GEE extraction ~2 hours, training ~30 min, scenarios ~1 hour. Bottleneck: vulnerability data curation.
+
+          Q: "Is 50% de-sealing realistic?"
+          A: Yes, it's already happening:
+          • Barcelona Eixample Green Axes (2020-23): permeable surface 1%→15%, peak surface temp −5°C. [Note: "503 superblocks by 2030" was Colau-era; Collboni admin paused new expansions. Bárbara Pons Giner from Barcelona Regional is in the audience.]
+          • Paris OASIS: 72 of 770 schoolyards transformed, 73 ha asphalt targeted, 2-4°C cooling.
+          • Netherlands Tegelwippen: 14M+ tiles removed since 2020, ~127 ha depaved, near-zero public cost.
+          • Berlin Schwammstadt: Blue-Green Alliance (March 2025), subsidies 10-100 €/m².
+          • Vienna Building Code 2023: mandates unsealing inner courtyards.
+          We're not asking cities to tear up streets overnight — we're asking different choices when they resurface on a 10-15 year cycle.
+
+          Q: "What about costs?"
+          A: Basic removal: 16-25 €/m². Full green replacement: 80-140 €/m². NbS documented 50% more cost-effective than grey alternatives (Interreg Europe).
+
+          Q: "Underground utilities?"
+          A: Main barrier in historic cores. Heritage layers limit excavation to 30-50 cm. Strategy: target post-war areas, schoolyards, parking lots first — shallow asphalt, simple soil, minimal utilities.
+
+          Q: "Why does Athens gain most but have lowest R²?"
+          A: Highest baseline imperviousness (95.2%) means maximum de-sealing headroom. Lowest R² because basin topography (katabatic flows, thermal inversions) creates dynamics the model captures imperfectly. The blend actually hurts Athens (−2.8%) because topography overrides climate-zone correction.
+
+          Q: "What about nighttime?"
+          A: Landsat overpass at 10:30 local solar time. Neighbourhood rankings preserved at night (r > 0.7). ECOSTRESS could complement. Framework sensor-agnostic — swap the LST layer.
+
+          Q: "Did you include wind?"
+          A: Indirectly: (1) 300m spatial lags (Oke's advective transport scale), (2) street betweenness centrality as ventilation proxy, (3) SVF for canyon ventilation. Direct wind integration is a next step.
+
+          Q: "Why 30m and not finer?"
+          A: MAUP tested at 30/60/90m. 60m loses 17% explained variance. 30m aligns with Landsat native resolution and radiative physics. Finer resolution would require different sensors.
+
+          Q: "What about the 3× claim? Isn't it 2.4×?"
+          A: Top-2 features per category: 3:1. Full categories: 2.4:1. Either way, surface permeability is the dominant lever.
+
+          Q: "Green gentrification?"
+          A: Real risk. Anguelovski et al. 2019 documented displacement from Barcelona Superblocks and NYC High Line. Vulnerability weighting (35%) targets current populations but can't prevent market dynamics. Requires policy: rent stabilisation, community land trusts, participatory budgeting. The model says where; communities decide how.
+
+          Q: "How does this connect to UrbanAI?"
+          A: Three bridges. (1) AI Localism: the hierarchical blend calibrates to local context — geographic contingency is the signal. (2) Augmented intelligence: SHAP gives planners the "receipt" for every prediction — AI as co-pilot. (3) Responsible AI: vulnerability weighting, open data, open tools, governance embedded not bolted on.
+
+          ═══════════════════════════════════════════════
+          POLICY CONTEXT
+          ═══════════════════════════════════════════════
+
+          • EU Nature Restoration Law (Aug 2024): no net loss of urban green by Dec 2030, increasing trend from Jan 2031. National plans due July 2026.
+          • EU Soil Strategy 2030: "no net land take by 2050"
+          • REGREEN project: European depaving guidelines (Zenodo, 2022)
+          • Heat = among the deadliest natural hazards in Europe. 2003: ~70K deaths. 2022: 61,672. 2024: 47,690.
+
+          ═══════════════════════════════════════════════
+          NARRATIVE TIMING SUMMARY (15 min)
+          ═══════════════════════════════════════════════
+
+          ACT 1 — WHY (0:00–1:55)
+            Slide 1 Title         [0:00 — 15s]
+            Slide 2 Hook          [0:15 — 30s]
+            Slide 3 Three Gaps    [0:45 — 40s]
+            Slide 4 Study Areas   [1:25 — 30s]
+
+          ACT 2 — HOW (1:55–6:15)
+            Slide 5 Data Sources  [1:55 — 20s]
+            Slide 6 GEE           [2:15 — 25s]
+            Slide 7a Urbanity     [2:40 — 20s]
+            Slide 7b Streetscapes [3:00 — 15s]
+            Slide 7c EUBUCCO      [3:15 — 15s]
+            Slide 8 VoxCity       [3:30 — 30s]
+            Slide 9 Pipeline      [4:00 — 30s]
+            Slide 10 XGBoost      [4:30 — 40s]
+            Slide 11 Validation   [5:10 — 35s]
+            Slide 12 Performance  [5:45 — 30s]
+
+          ACT 3 — FINDINGS (6:15–10:30)
+            Slide 13 SHAP         [6:15 — 50s] ★ central finding
+            Slide 14 Geography    [7:05 — 40s] ★ AI Localism
+            Slide 15 Hotspots     [7:45 — 35s]
+            Slide 16 Vulnerability [8:20 — 40s] ★ equity pivot
+            Slide 16b Interventions [9:00 — 40s]
+            Slide 17 50% Threshold [9:40 — 50s] ★ policy anchor
+
+          ACT 4 — ACTION (10:30–13:15)
+            Slide 18 City Cards   [10:30 — 40s]
+            Slide 19 Co-Benefits  [11:10 — 35s]
+            Slide 20 Takeaways    [11:45 — 40s] ★ audience memory
+            Slide 21 Limitations  [12:25 — 35s]
+            Slide 22 Closing      [13:00 — 15s]
+
+          Buffer: ~1:45 for natural pauses, clicks, audience reactions.
         </aside>
       </section>
 
     </div><!-- .slides -->
   </div><!-- .reveal -->
 
-  <!-- Leaflet (local copy; CDN: https://unpkg.com/leaflet@1.9.4/dist/leaflet.js) -->
+  <!-- Leaflet (local copy) -->
   <script src="js/vendor/leaflet/leaflet.js"></script>
 
-  <!-- Reveal.js -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <!-- Reveal.js (local) -->
+  <script src="node_modules/reveal.js/dist/reveal.js"></script>
+  <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
@@ -1025,7 +1203,7 @@
       function update(now) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.floor(start + (target - start) * eased);
         el.textContent = current.toLocaleString();
         if (progress < 1) requestAnimationFrame(update);
@@ -1034,7 +1212,6 @@
       requestAnimationFrame(update);
     }
 
-    // Trigger count-up when hook slide appears
     Reveal.on('slidechanged', function(event) {
       const numEl = event.currentSlide.querySelector('.large-number');
       if (numEl && numEl.dataset.animated !== 'true') {
@@ -1043,10 +1220,11 @@
       }
     });
 
-    // Speaker view timer warnings - light theme
+    // Speaker view timer — 1Hz update
     (function() {
       var startTime = null;
       var timerEl = null;
+      var intervalId = null;
 
       function formatTime(ms) {
         var s = Math.floor(ms / 1000);
@@ -1074,11 +1252,11 @@
         timerEl.textContent = formatTime(elapsed);
         timerEl.style.display = 'block';
 
-        if (minutes >= 14) {
+        if (minutes >= 20) {
           timerEl.style.background = 'rgba(196,81,58,0.9)';
           timerEl.style.color = '#ffffff';
           timerEl.style.borderColor = '#c4513a';
-        } else if (minutes >= 12) {
+        } else if (minutes >= 18) {
           timerEl.style.background = 'rgba(240,192,64,0.85)';
           timerEl.style.color = '#1a1a1a';
           timerEl.style.borderColor = '#f0c040';
@@ -1087,23 +1265,21 @@
           timerEl.style.color = '#1a1a1a';
           timerEl.style.borderColor = 'rgba(0,0,0,0.08)';
         }
-        requestAnimationFrame(updateTimer);
       }
 
-      // Start timer on first slide advance (not on load)
       createTimer();
       var started = false;
       Reveal.on('slidechanged', function(event) {
         if (!started && event.indexh > 0) {
           started = true;
           startTime = Date.now();
-          updateTimer();
+          intervalId = setInterval(updateTimer, 1000);
         }
       });
 
       // Double-click timer to reset
       document.addEventListener('dblclick', function(e) {
-        if (e.target.id === 'presentation-timer' || e.clientX > window.innerWidth - 120 && e.clientY < 50) {
+        if (e.target.id === 'presentation-timer') {
           startTime = Date.now();
         }
       });
@@ -1112,9 +1288,6 @@
 
   <!-- Study areas location map -->
   <script src="js/study-areas-map.js"></script>
-
-  <!-- Interactive priority zones map -->
-  <script src="js/interactive-map.js"></script>
 
 </body>
 </html>
