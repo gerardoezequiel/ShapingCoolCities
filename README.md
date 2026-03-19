@@ -1,8 +1,8 @@
 # Shaping Cool Cities
 
-**Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities**
+**Predicting urban heat and optimising cooling interventions across European cities**
 
-The summer of 2022 killed over 61,000 Europeans from heat-related causes, the deadliest heatwave on record. Yet cities remain unprepared, not because data is scarce, but because translating observations into actionable cooling strategies remains unsolved.
+The summer of 2022 killed over 61,000 Europeans from heat-related causes—the deadliest heatwave on record. Yet cities remain unprepared, not because data is scarce, but because translating observations into actionable cooling strategies remains unsolved.
 
 This repository contains a complete analytical framework that bridges that gap: from satellite imagery and 3D urban models to interpretable predictions and intervention priorities.
 
@@ -16,7 +16,7 @@ European cities have never had more data about urban heat. Satellites capture su
 
 | Finding | Implication |
 |---------|-------------|
-| Thermal effects operate at **300-metre scales** | Cooling one plot achieves nothing if surroundings remain sealed. Most programmes target individual properties, the wrong scale. |
+| Thermal effects operate at **300-metre scales** | Cooling one plot achieves nothing if surroundings remain sealed. Most programmes target individual properties—the wrong scale. |
 | **Surface permeability matters 3× more than vegetation** | The policy obsession with tree planting misallocates resources. De-sealing delivers greater cooling returns. |
 | A **50% de-sealing threshold** marks a regime boundary | Below this, evaporative cooling becomes viable. Incremental improvements that fail to cross this threshold waste money. |
 
@@ -24,8 +24,8 @@ European cities have never had more data about urban heat. Satellites capture su
 
 ## What This Framework Does
 
-The pipeline processes 6 regular-size study areas across six European cities (Amsterdam, Athens, Barcelona, Berlin, Madrid, Paris) through two phases:
-
+The pipeline processes six regular study areas with varying urban morphology across six European cities (Amsterdam, Athens, Barcelona, Berlin, Madrid, Paris) through two phases:
+![Methodology overview](Shapping_cool_cities_method.png)
 ### Phase 1: Multi-Source Feature Engineering
 - **Satellite imagery** — Extract land surface temperature, NDVI, spectral indices, and impervious fraction from Landsat 8/9 via Google Earth Engine
 - **3D morphology** — Generate sky view factor, solar irradiance, and canyon geometry from voxelised building models (VoxCity)
@@ -40,23 +40,10 @@ These heterogeneous sources are spatially integrated at 30m resolution with clim
 3. **Prioritise where** — Combine physical cooling potential with demographic vulnerability
 4. **Quantify interventions** — Scenario analysis shows achievable cooling: **1.26°C mean reduction** in priority zones
 
-![Methodology overview](results/Shapping_cool_cities_method.png)
-
-![VoxCity 3D solar simulation](results/figures/voxcity_iso_solar_panel.png)
-*Solar irradiance simulation from VoxCity 3D voxel models across six cities. Yellow indicates high solar exposure; blue indicates shaded areas.*
 
 ---
 
 ## Key Results
-
-![LST intracity](results/figures/gee_LST_mean_intracity.png)
-*The problem: Land Surface Temperature anomalies across six cities. Red indicates urban heat islands exceeding city averages by 2-4°C.*
-
-![Risk tiers](results/figures/risk_tiers_panels.png)
-*Combined heat-vulnerability risk tiers across six cities. Dark red indicates areas where high thermal exposure meets demographic vulnerability, requiring priority intervention.*
-
-![Temperature reduction](results/figures/temperature_reduction_map.png)
-*Predicted temperature reductions from optimised intervention scenarios. Cooling of 1-2°C achievable in priority zones through strategic de-sealing.*
 
 ### Feature Importance Hierarchy
 
@@ -96,14 +83,10 @@ These heterogeneous sources are spatially integrated at 30m resolution with clim
 │   ├── 08_Risk_Hotspot.ipynb     # Hotspot & vulnerability mapping
 │   └── 09_Interventions.ipynb    # Cooling scenarios
 │
-├── data/
-│   ├── 0-raw/              # External data sources
-│   ├── 1-processed/        # Processed features per source
-│   └── 2-model-ready/      # Final model input
-│
-└── results/
-    ├── figures/            # Visualisation outputs
-    └── modeling/           # Trained models & predictions
+└── data/
+    ├── 0-raw/              # External data sources
+    ├── 1-processed/        # Processed features per source
+    └── 2-model-ready/      # Final model input
 ```
 
 ---
@@ -133,11 +116,10 @@ pip install -r requirements.txt
 earthengine authenticate
 ```
 
-Then update the GEE project ID in the notebooks:
-- `notebooks/04_GoogleEarthEngine.ipynb`
-- `notebooks/05_VoxCity.ipynb`
-
-Replace `'urbanheat-dissertation'` with your own GEE project ID in the `ee.Initialize()` call.
+Create a `.env` file with your GEE project ID:
+```
+GEE_PROJECT=your-project-id
+```
 
 ---
 
@@ -174,10 +156,11 @@ If you use this code or methodology, please cite:
 ```bibtex
 @mastersthesis{martincarreno2026,
   author  = {Martín Carreño, Gerardo Ezequiel},
-  title   = {Shaping Cool Cities: Multi-Source Data Fusion for Modelling Urban Heat Mitigation Across Six European Cities},
+  title   = {Urban Heat Island Modelling and Mitigation Strategies:
+             A Multi-City Analysis of European Cities},
   school  = {University College London},
   year    = {2026},
-  type    = {MSc Thesis}
+  type    = {MSc Dissertation}
 }
 ```
 
@@ -192,6 +175,3 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Acknowledgements
 
 This research was conducted as part of the MSc Urban Spatial Science programme at the Centre for Advanced Spatial Analysis (CASA), University College London.
-
-**Author:** Gerardo Ezequiel Martín Carreño — [LinkedIn](https://www.linkedin.com/in/gerardoezequielmc/)
-**Supervisor:** Duncan Smith
